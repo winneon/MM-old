@@ -140,21 +140,18 @@ public class MainMM extends JavaPlugin {
 				
 				this.config = yaml;
 				this.configFile = file;
-				
 				break;
 				
 			case 1:
 				
 				this.datacore = yaml;
 				this.datacoreFile = file;
-				
 				break;
 				
 			case 2:
 				
 				this.help = yaml;
 				this.helpFile = file;
-				
 				break;
 			
 			}
