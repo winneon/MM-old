@@ -74,6 +74,7 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 						} catch (InvalidClassException e){
 							
 							this.s(p, "&cThat is not a valid class! Type /mm class list for a list of classes.");
+							
 							return true;
 							
 						}
@@ -186,6 +187,7 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 							} catch (InvalidClassException e){
 								
 								this.s(p, "&cThat is not a valid class! Type /mm class list for a list of classes.");
+							
 								return true;
 								
 							}
