@@ -1,0 +1,10 @@
+name: MobMondays
+version: 0.0.1
+main: com.github.winneonsword.MM.MainMM
+commands:
+    mm:
+        description: The main help menu.
+        usage: 'Usage: /mm ? - The main help menu.'
+permissions:
+    wa.staff:
+        description: WA Staff
