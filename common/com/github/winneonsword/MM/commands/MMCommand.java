@@ -167,7 +167,7 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 						String[] c = this.getClassArray();
 						ClassInfo name = null;
 						
-						if (args[1].equalsIgnoreCase("list")){
+						if (args[1].equals("list")){
 							
 							this.s(p, "Class List:");
 							
