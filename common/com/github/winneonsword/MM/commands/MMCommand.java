@@ -46,7 +46,7 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 					
 					String[] helpMenu = {
 							
-							WC + "Mob Mondays Help Panel",
+							this.WC + "Mob Mondays Help Panel",
 							"&5- &d/mm ? &5// &dThe main help panel.",
 							"&5- &d/mm join <class> &5// &dJoin an MM game.",
 							"&5- &d/mm leave &5// &dLeave an MM game.",
