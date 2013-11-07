@@ -53,7 +53,7 @@ public class MainMM extends JavaPlugin {
 		
 		this.setClassInfo();
 		
-		this.getLogger().log(Level.INFO, "Mob Mondays has been hooked and enabled alonside WCAPI!");
+		this.getLogger().log(Level.INFO, "Mob Mondays has been hooked and enabled alongside WCAPI!");
 		
 	}
 	
