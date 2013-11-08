@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -15,6 +16,11 @@ public class UtilsMM {
 	
 	public static HashMap<String, String> changingClass = new HashMap<String, String>();
 	public static String WC = "&dWC &5// &d";
+	
+	private static Location arenaLoc;
+	private static int arenaX;
+	private static int arenaY;
+	private static int arenaZ;
 	
 	public UtilsMM(MainMM plugin){
 		
@@ -45,6 +51,12 @@ public class UtilsMM {
 			p.sendMessage(AS(message[i]));
 			
 		}
+		
+	}
+	
+	public static void blankS(Player p, String message){
+		
+		p.sendMessage(AS(message));
 		
 	}
 	
@@ -168,6 +180,39 @@ public class UtilsMM {
 		
 		pl.datacore.set("Users." + p.getName() + ".class", name);
 		changingClass.remove(p.getName());
+		
+	}
+	
+	public static Location getArena(){
+		
+		return arenaLoc;
+		
+	}
+	
+	public static int getArenaX(){
+		
+		return arenaX;
+		
+	}
+	
+	public static int getArenaY(){
+		
+		return arenaY;
+		
+	}
+	
+	public static int getArenaZ(){
+		
+		return arenaZ;
+		
+	}
+	
+	public static void setArena(Player p){
+		
+		arenaLoc = p.getLocation();
+		arenaX = arenaLoc.getBlockX();
+		arenaY = arenaLoc.getBlockY();
+		arenaZ = arenaLoc.getBlockZ();
 		
 	}
 	
