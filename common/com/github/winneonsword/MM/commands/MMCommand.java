@@ -35,7 +35,7 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 				
 			} else {
 				
-				switch (args[0]){
+				switch (args[0].toLowerCase()){
 				
 				default:
 					
@@ -167,7 +167,7 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 						String[] c = this.getClassArray();
 						ClassInfo name = null;
 						
-						if (args[1].equals("list")){
+						if (args[1].equalsIgnoreCase("list")){
 							
 							this.s(p, "Class List:");
 							
