@@ -36,9 +36,6 @@ public class MainMM extends JavaPlugin {
 		this.api = (WCAPI) WCAPI;
 		this.wcm = new WCManager(api);
 		
-		this.registerCommands();
-		this.registerListeners();
-		
 		try {
 			
 			this.firstRun();
@@ -51,7 +48,11 @@ public class MainMM extends JavaPlugin {
 			
 		}
 		
+		this.loadYMLs();
 		this.setClassInfo();
+		
+		this.registerCommands();
+		this.registerListeners();
 		
 		this.getLogger().log(Level.INFO, "Mob Mondays has been hooked and enabled alongside WCAPI!");
 		
@@ -61,6 +62,10 @@ public class MainMM extends JavaPlugin {
 	public void onDisable(){
 		
 		this.datacore.set("playerList", UtilsMM.playerList);
+		this.datacore.set("arenaLoc.arenaX", UtilsMM.getArenaX());
+		this.datacore.set("arenaLoc.arenaY", UtilsMM.getArenaY());
+		this.datacore.set("arenaLoc.arenaZ", UtilsMM.getArenaZ());
+		this.datacore.set("arenaLoc.arenaW", UtilsMM.getArenaW().getName());
 		this.saveYMLs();
 		this.getLogger().log(Level.INFO, "Mob Mondays has been disabled.");
 		

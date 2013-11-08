@@ -212,7 +212,7 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 				case "set":
 					
 					this.setArena(p);
-					this.s(p, "Set the arena to &6" + this.getArenaX() + "&d, &6" + this.getArenaY() + "&d, &6" + this.getArenaZ() + "&d!");
+					this.s(p, "Set the arena to &6" + this.getArenaX() + "&d, &6" + this.getArenaY() + "&d, &6" + this.getArenaZ() + "&d in world &6" + this.getArenaW().getName() + "&d!");
 					break;
 					
 				case "confirm":

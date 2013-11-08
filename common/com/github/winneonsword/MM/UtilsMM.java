@@ -3,10 +3,12 @@ package com.github.winneonsword.MM;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -17,14 +19,18 @@ public class UtilsMM {
 	public static HashMap<String, String> changingClass = new HashMap<String, String>();
 	public static String WC = "&dWC &5// &d";
 	
-	private static Location arenaLoc;
 	private static int arenaX;
 	private static int arenaY;
 	private static int arenaZ;
+	private static World arenaW;
+	
+	private static Location arenaLoc;
 	
 	public UtilsMM(MainMM plugin){
 		
 		this.pl = plugin;
+		
+		this.setArenaLocs();
 		
 	}
 	
@@ -207,12 +213,44 @@ public class UtilsMM {
 		
 	}
 	
+	public static World getArenaW(){
+		
+		return arenaW;
+		
+	}
+	
 	public static void setArena(Player p){
 		
 		arenaLoc = p.getLocation();
 		arenaX = arenaLoc.getBlockX();
 		arenaY = arenaLoc.getBlockY();
 		arenaZ = arenaLoc.getBlockZ();
+		arenaW = arenaLoc.getWorld();
+		
+	}
+	
+	private void setArenaLocs(){
+		
+		try {
+			
+			this.arenaX = pl.datacore.getInt("arenaLoc.arenaX");
+			this.arenaY = pl.datacore.getInt("arenaLoc.arenaY");
+			this.arenaZ = pl.datacore.getInt("arenaLoc.arenaZ");
+			this.arenaW = Bukkit.getWorld(pl.datacore.getString("arenaLoc.arenaW"));
+			this.arenaLoc = new Location(arenaW, arenaX, arenaY, arenaZ);
+			
+		} catch (IllegalArgumentException e){
+			
+			this.arenaX = 0;
+			this.arenaY = 0;
+			this.arenaZ = 0;
+			this.arenaW = Bukkit.getWorlds().get(0);
+			this.arenaLoc = null;
+			
+			Bukkit.getLogger().log(Level.SEVERE, "Failed to set the arena location! Set the arena with /mm set ASAP!");
+			e.printStackTrace();
+			
+		}
 		
 	}
 	
