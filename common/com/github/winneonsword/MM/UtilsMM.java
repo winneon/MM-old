@@ -19,6 +19,9 @@ public class UtilsMM {
 	public static HashMap<String, String> changingClass = new HashMap<String, String>();
 	public static String WC = "&dWC &5// &d";
 	
+	public static boolean toggle;
+	public static List<String> playerList;
+	
 	private static int arenaX;
 	private static int arenaY;
 	private static int arenaZ;
@@ -29,12 +32,11 @@ public class UtilsMM {
 	public UtilsMM(MainMM plugin){
 		
 		this.pl = plugin;
+		this.playerList = pl.datacore.getStringList("playerList");
 		
 		this.setArenaLocs();
 		
 	}
-	
-	public static List<String> playerList = pl.datacore.getStringList("playerList");
 	
 	public static String AS(String message){
 		
@@ -116,6 +118,7 @@ public class UtilsMM {
 		
 	}
 	
+	@Deprecated
 	public static boolean checkClass(String name){
 		
 		List<String> classes = getClassList();
@@ -143,6 +146,22 @@ public class UtilsMM {
 		} else {
 			
 			return true;
+			
+		}
+		
+	}
+	
+	public static boolean toggleJoin(){
+		
+		toggle = !(toggle);
+		
+		if (toggle){
+			
+			return true;
+			
+		} else {
+			
+			return false;
 			
 		}
 		
@@ -226,6 +245,19 @@ public class UtilsMM {
 		arenaY = arenaLoc.getBlockY();
 		arenaZ = arenaLoc.getBlockZ();
 		arenaW = arenaLoc.getWorld();
+		
+	}
+	
+	public static boolean checkArena(){
+		
+		if (arenaLoc == null){
+			
+			return false;
+			
+		} else {
+			
+			return true;
+		}
 		
 	}
 	

@@ -59,9 +59,47 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 					this.s(p, helpMenu);
 					break;
 					
+				case "toggle":
+					
+					if (!(p.hasPermission("wa.staff"))){
+						
+						this.s(p, "&cDoes it look like you have permission to use this?");
+						
+					} else {
+						
+						boolean check = this.checkArena();
+						
+						if (!(check)){
+							
+							this.s(p, "&cThe arena has not been set! Type /mm set to set the arena!");
+							
+						} else {
+							
+							boolean toggle = this.toggleJoin();
+							
+							if (toggle){
+								
+								this.s(p, "Toggled open status of MM to &6open&d.");
+								
+							} else {
+								
+								this.s(p, "Toggled open status of MM to &6closed&d.");
+								
+							}
+							
+						}
+						
+					}
+					
+					break;
+					
 				case "join":
 					
-					if (args.length == 1){
+					if (!(this.toggle)){
+						
+						this.s(p, "&cJoining of MM is not open at the moment!");
+						
+					} else if (args.length == 1){
 						
 						this.s(p, "&cCorrect usage: /mm join <class> - For classes, type /mm class list.");
 						
@@ -102,7 +140,16 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 							
 						} else {
 							
-							this.s(p, "You have joined Mob Mondays as a &6" + args[1] + "&d!");
+							this.s(p, "You have joined Mob Mondays as a &6" + args[1] + "&d! Warping you to the arena.");
+							this.delay(pl, new Runnable(){
+								
+								public void run(){
+									
+									finalP.teleport(UtilsMM.getArena());
+									
+								}
+								
+							}, 40L);
 							
 						}
 						
@@ -121,7 +168,15 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 					} else {
 						
 						this.s(p, "You have left Mob Mondays! Warping you to spawn.");
-						p.performCommand("s");
+						this.delay(pl, new Runnable(){
+							
+							public void run(){
+								
+								finalP.performCommand("s");
+								
+							}
+							
+						}, 20L);
 						
 					}
 					
@@ -250,12 +305,14 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 					if (!(p.hasPermission("wa.staff"))){
 						
 						this.s(p, "&cDoes it look like you have permission to use this?");
-						break;
+						
+					} else {
+						
+						Bukkit.getPluginManager().disablePlugin(pl);
+						this.s(p, "Successfully disabled Mob Mondays.");
 						
 					}
 					
-					Bukkit.getPluginManager().disablePlugin(pl);
-					this.s(p, "Successfully disabled Mob Mondays.");
 					break;
 					
 				}

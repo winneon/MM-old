@@ -61,12 +61,7 @@ public class MainMM extends JavaPlugin {
 	@Override
 	public void onDisable(){
 		
-		this.datacore.set("playerList", UtilsMM.playerList);
-		this.datacore.set("arenaLoc.arenaX", UtilsMM.getArenaX());
-		this.datacore.set("arenaLoc.arenaY", UtilsMM.getArenaY());
-		this.datacore.set("arenaLoc.arenaZ", UtilsMM.getArenaZ());
-		this.datacore.set("arenaLoc.arenaW", UtilsMM.getArenaW().getName());
-		this.saveYMLs();
+		this.saveDisableVariables();
 		this.getLogger().log(Level.INFO, "Mob Mondays has been disabled.");
 		
 	}
@@ -162,6 +157,17 @@ public class MainMM extends JavaPlugin {
 			}
 			
 		}
+		
+	}
+	
+	private void saveDisableVariables(){
+		
+		this.datacore.set("playerList", UtilsMM.playerList);
+		this.datacore.set("arenaLoc.arenaX", UtilsMM.getArenaX());
+		this.datacore.set("arenaLoc.arenaY", UtilsMM.getArenaY());
+		this.datacore.set("arenaLoc.arenaZ", UtilsMM.getArenaZ());
+		this.datacore.set("arenaLoc.arenaW", UtilsMM.getArenaW().getName());
+		this.saveYMLs();
 		
 	}
 	
