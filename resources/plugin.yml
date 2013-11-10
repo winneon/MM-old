@@ -1,6 +1,9 @@
 name: MobMondays
 version: 0.0.1
+author: WinneonSword
+prefix: MM
 main: com.github.winneonsword.MM.MainMM
+depend: [WCAPI]
 commands:
     mm:
         description: The main help menu.
@@ -8,3 +11,4 @@ commands:
 permissions:
     wa.staff:
         description: WA Staff
+        default: op

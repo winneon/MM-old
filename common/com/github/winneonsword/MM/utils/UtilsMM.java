@@ -20,9 +20,8 @@ public class UtilsMM {
 	
 	public static MainMM pl;
 	
-	public static HashMap<String, String> changingClass = new HashMap<String, String>();
-	public static String WC = "&dWC &5// &d";
-	
+	public static HashMap<String, String> changingClass;
+	public static String WC;
 	public static boolean toggle;
 	public static List<String> playerList;
 	
@@ -36,8 +35,8 @@ public class UtilsMM {
 	public UtilsMM(MainMM plugin){
 		
 		this.pl = plugin;
-		this.playerList = pl.datacore.getStringList("playerList");
 		
+		this.setVariables();
 		this.setArenaLocs();
 		
 	}
@@ -262,6 +261,14 @@ public class UtilsMM {
 			
 			return true;
 		}
+		
+	}
+	
+	private void setVariables(){
+		
+		this.changingClass = new HashMap<String, String>();
+		this.WC = "&dWC &5// &d";
+		this.playerList = pl.datacore.getStringList("playerList");
 		
 	}
 	
