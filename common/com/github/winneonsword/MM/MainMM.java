@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -54,6 +56,7 @@ public class MainMM extends JavaPlugin {
 		
 		this.loadYMLs();
 		this.setClassInfo();
+		this.setClassData();
 		
 		this.registerCommands();
 		this.registerListeners();
@@ -226,6 +229,26 @@ public class MainMM extends JavaPlugin {
 		this.datacore.set("Classes." + c[5] + ".description", sniperDescription);
 		this.datacore.set("Classes." + c[5] + ".alpha", sniperAlpha);
 		this.datacore.set("Classes." + c[5] + ".omega", sniperOmega);
+		
+		this.saveYMLs();
+		
+	}
+	
+	private void setClassData(){
+		
+		String[] c = UtilsMM.getClassArray();
+		
+		ItemStack medicWeapon = new ItemStack(Material.IRON_SWORD, 1);
+		ItemStack medicHelm = new ItemStack(Material.GOLD_HELMET, 1);
+		ItemStack medicChest = new ItemStack(Material.GOLD_CHESTPLATE, 1);
+		ItemStack medicTrousers = new ItemStack(Material.GOLD_LEGGINGS, 1);
+		ItemStack medicBooties = new ItemStack(Material.GOLD_BOOTS, 1);
+		
+		this.datacore.set("Classes." + c[0] + ".data.weapon", medicWeapon);
+		this.datacore.set("Classes." + c[0] + ".data.helmet", medicHelm);
+		this.datacore.set("Classes." + c[0] + ".data.chestplate", medicChest);
+		this.datacore.set("Classes." + c[0] + ".data.trousers", medicTrousers);
+		this.datacore.set("Classes." + c[0] + ".data.booties", medicBooties);
 		
 		this.saveYMLs();
 		
