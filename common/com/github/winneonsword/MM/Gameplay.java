@@ -1,5 +1,9 @@
 package com.github.winneonsword.MM;
 
-public class Gameplay {
+import org.bukkit.event.Listener;
 
+public class Gameplay implements Listener {
+	
+	
+	
 }

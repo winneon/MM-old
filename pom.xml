@@ -7,7 +7,7 @@
   <description>A mob arena game that is designed for the server network Worlds Collide.</description>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <bukkitVersion>1.6.4-R2.0-SNAPSHOT</bukkitVersion>
+    <bukkitVersion>1.6.4-R2.1-SNAPSHOT</bukkitVersion>
     <apiDir>C:\Users\WS\dev\api</apiDir>
   </properties>
   <repositories>
