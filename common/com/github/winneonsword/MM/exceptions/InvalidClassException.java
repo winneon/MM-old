@@ -1,4 +1,4 @@
-package com.github.winneonsword.MM;
+package com.github.winneonsword.MM.exceptions;
 
 import java.util.logging.Level;
 

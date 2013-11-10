@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.apache.commons.lang.WordUtils;
 
+import com.github.winneonsword.MM.exceptions.InvalidClassException;
+import com.github.winneonsword.MM.utils.UtilsMM;
+
 public class ClassInfo {
 	
 	private String name;

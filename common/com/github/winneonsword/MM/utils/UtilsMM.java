@@ -1,4 +1,4 @@
-package com.github.winneonsword.MM;
+package com.github.winneonsword.MM.utils;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,6 +11,10 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+
+import com.github.winneonsword.MM.ClassInfo;
+import com.github.winneonsword.MM.MainMM;
+import com.github.winneonsword.MM.exceptions.InvalidClassException;
 
 public class UtilsMM {
 	

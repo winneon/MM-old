@@ -10,9 +10,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.github.winneonsword.MM.ClassInfo;
-import com.github.winneonsword.MM.InvalidClassException;
 import com.github.winneonsword.MM.MainMM;
-import com.github.winneonsword.MM.UtilsMM;
+import com.github.winneonsword.MM.exceptions.InvalidClassException;
+import com.github.winneonsword.MM.utils.UtilsMM;
 
 public class MMCommand extends UtilsMM implements CommandExecutor {
 	
