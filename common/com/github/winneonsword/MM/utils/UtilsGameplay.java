@@ -9,16 +9,38 @@ import com.github.winneonsword.MM.exceptions.InvalidClassException;
 
 public class UtilsGameplay extends UtilsMM {
 	
-	private static Player p;
-	private static PlayerInventory inven = p.getInventory();
-	private static String clazz = getClass(p);
+	private Player p;
+	private PlayerInventory inven;
+	private String clazz;
+	private ClassData data = null;
 	
-	private static ClassData data;
-	
-	public UtilsGameplay(MainMM pl, Player p){
+	public UtilsGameplay(MainMM pl){
 		
 		super(pl);
+		
+	}
+	
+	public void giveGameItems(){
+		
+		this.inven.clear();
+		this.giveClassItems();
+		
+	}
+	
+	public void giveClassItems(){
+		
+		this.inven.setArmorContents(data.getArmour());
+		this.inven.setItem(0, data.getWeapon());
+		this.inven.setItem(7, data.getAlphaDisc());
+		this.inven.setItem(8, data.getOmegaDisc());
+		
+	}
+	
+	public void setVariables(Player p){
+		
 		this.p = p;
+		this.inven = this.p.getInventory();
+		this.clazz = this.getClass(p);
 		
 		try {
 			
@@ -29,14 +51,6 @@ public class UtilsGameplay extends UtilsMM {
 			e.printStackTrace();
 			
 		}
-		
-	}
-	
-	public static void giveClassItems(Player p){
-		
-		inven.clear();
-		inven.setArmorContents(data.getArmour());
-		inven.setItem(0, data.getWeapon());
 		
 	}
 	

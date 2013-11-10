@@ -292,7 +292,7 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 						
 					} else {
 						
-						Gameplay game = new Gameplay(this.pl, p);
+						Gameplay game = new Gameplay(this.pl);
 						
 						game.startGame();
 						

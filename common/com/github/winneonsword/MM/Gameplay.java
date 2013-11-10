@@ -8,9 +8,9 @@ import com.github.winneonsword.MM.utils.UtilsGameplay;
 
 public class Gameplay extends UtilsGameplay implements Listener {
 	
-	public Gameplay(MainMM pl, Player p){
+	public Gameplay(MainMM pl){
 		
-		super(pl, p);
+		super(pl);
 		
 	}
 	
@@ -22,7 +22,8 @@ public class Gameplay extends UtilsGameplay implements Listener {
 			
 			Player p = Bukkit.getPlayer(pl);
 			
-			this.giveClassItems(p);
+			this.setVariables(p);
+			this.giveGameItems();
 			
 		}
 		

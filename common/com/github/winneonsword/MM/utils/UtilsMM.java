@@ -49,6 +49,18 @@ public class UtilsMM {
 		
 	}
 	
+	public static String[] AS(String[] message){
+		
+		for (int i = 0; i < message.length; i++){
+			
+			message[i] = ChatColor.translateAlternateColorCodes('&', message[i]);
+			
+		}
+		
+		return message;
+		
+	}
+	
 	public static void s(Player p, String message){
 		
 		p.sendMessage(AS(WC + message));
