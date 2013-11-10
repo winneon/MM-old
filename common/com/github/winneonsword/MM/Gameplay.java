@@ -1,5 +1,6 @@
 package com.github.winneonsword.MM;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
@@ -7,17 +8,23 @@ import com.github.winneonsword.MM.utils.UtilsGameplay;
 
 public class Gameplay extends UtilsGameplay implements Listener {
 	
-	public Gameplay(MainMM pl){
+	public Gameplay(MainMM pl, Player p){
 		
-		super(pl);
+		super(pl, p);
 		
 	}
 	
-	public void startGame(Player p){
+	public void startGame(){
 		
 		// Warning! Do not run this method several times in a row!
 		
-		this.distributeItems();
+		for (String pl : this.getPlayerList()){
+			
+			Player p = Bukkit.getPlayer(pl);
+			
+			this.giveClassItems(p);
+			
+		}
 		
 	}
 	

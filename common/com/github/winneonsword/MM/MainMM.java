@@ -112,7 +112,7 @@ public class MainMM extends JavaPlugin {
 	
 	private void registerListeners(){
 		
-		this.pm.registerEvents(new Gameplay(this), this);
+		
 		
 	}
 	
