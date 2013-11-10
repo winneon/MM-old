@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.github.winneonsword.MM.ClassInfo;
+import com.github.winneonsword.MM.Gameplay;
 import com.github.winneonsword.MM.MainMM;
 import com.github.winneonsword.MM.exceptions.InvalidClassException;
 import com.github.winneonsword.MM.utils.UtilsMM;
@@ -266,8 +267,37 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 					
 				case "set":
 					
-					this.setArena(p);
-					this.s(p, "Set the arena to &6" + this.getArenaX() + "&d, &6" + this.getArenaY() + "&d, &6" + this.getArenaZ() + "&d in world &6" + this.getArenaW().getName() + "&d!");
+					if (!(p.hasPermission("wa.staff"))){
+						
+						this.s(p, "&cDoes it look like you have permission to use this?");
+						
+					} else {
+						
+						this.setArena(p);
+						this.s(p, "Set the arena to &6" + this.getArenaX() + "&d, &6" + this.getArenaY() + "&d, &6" + this.getArenaZ() + "&d in world &6" + this.getArenaW().getName() + "&d!");
+						
+					}
+					
+					break;
+					
+				case "start":
+					
+					if (!(p.hasPermission("wa.staff"))){
+						
+						this.s(p, "&cDoes it look like you have permission to use this?");
+						
+					} else if (this.getPlayerList().size() < 1){
+						
+						this.s(p, "&cThere are not at least 5 people in MM yet!");
+						
+					} else {
+						
+						Gameplay game = new Gameplay(this.pl);
+						
+						game.startGame(p);
+						
+					}
+					
 					break;
 					
 				case "confirm":

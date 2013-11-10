@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.github.lyokofirelyte.WCAPI.WCAPI;
@@ -18,6 +19,7 @@ public class MainMM extends JavaPlugin {
 	
 	public WCAPI api;
 	public WCManager wcm;
+	public PluginManager pm;
 	
 	public static YamlConfiguration config = new YamlConfiguration();
 	public static YamlConfiguration datacore = new YamlConfiguration();
@@ -36,6 +38,7 @@ public class MainMM extends JavaPlugin {
 		Plugin WCAPI = Bukkit.getServer().getPluginManager().getPlugin("WCAPI");
 		this.api = (WCAPI) WCAPI;
 		this.wcm = new WCManager(api);
+		this.pm = this.getServer().getPluginManager();
 		
 		try {
 			
@@ -109,7 +112,7 @@ public class MainMM extends JavaPlugin {
 	
 	private void registerListeners(){
 		
-		
+		this.pm.registerEvents(new Gameplay(this), this);
 		
 	}
 	
