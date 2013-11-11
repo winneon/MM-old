@@ -1,0 +1,371 @@
+Classes:
+  medic:
+    description: A support class that is focused on healing.
+    alpha: Give yourself Regeneration III for 1 minute.
+    omega: Give everyone including yourself Regeneration III for 1 minute.
+    data:
+      weapon:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_SWORD
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §6§lMedic Sword
+          lore:
+          - §6To only be used with a medic.
+          enchants:
+            DURABILITY: 10
+      helmet:
+        ==: org.bukkit.inventory.ItemStack
+        type: GOLD_HELMET
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §6§lMedic Helmet
+          lore:
+          - §6To only be used with a medic.
+          enchants:
+            DURABILITY: 10
+            PROTECTION_ENVIRONMENTAL: 1
+      chestplate:
+        ==: org.bukkit.inventory.ItemStack
+        type: GOLD_CHESTPLATE
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §6§lMedic Chestplate
+          lore:
+          - §6To only be used with a medic.
+          enchants:
+            DURABILITY: 10
+            PROTECTION_ENVIRONMENTAL: 1
+      trousers:
+        ==: org.bukkit.inventory.ItemStack
+        type: GOLD_LEGGINGS
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §6§lMedic Trousers
+          lore:
+          - §6To only be used with a medic.
+          enchants:
+            DURABILITY: 10
+            PROTECTION_ENVIRONMENTAL: 1
+      booties:
+        ==: org.bukkit.inventory.ItemStack
+        type: GOLD_BOOTS
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §6§lMedic Booties
+          lore:
+          - §6To only be used with a medic.
+          enchants:
+            DURABILITY: 10
+            PROTECTION_ENVIRONMENTAL: 1
+  spirit:
+    description: A defensive class that is focused on flying and strategy.
+    alpha: Give yourself the ability to fly for 1 minute.
+    omega: Give everyone including yourself the ability to fly for 1 minute.
+    data:
+      weapon:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_SWORD
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §b§lSpirit Sword
+          lore:
+          - §6To only be used with a spirit.
+          enchants:
+            DURABILITY: 10
+      helmet:
+        ==: org.bukkit.inventory.ItemStack
+        type: GOLD_HELMET
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §b§lSpirit Helmet
+          lore:
+          - §6To only be used with a spirit.
+          enchants:
+            DURABILITY: 10
+      chestplate:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_CHESTPLATE
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §b§lSpirit Chestplate
+          lore:
+          - §6To only be used with a spirit.
+          enchants:
+            DURABILITY: 10
+      trousers:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_LEGGINGS
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §b§lSpirit Trousers
+          lore:
+          - §6To only be used with a spirit.
+          enchants:
+            DURABILITY: 10
+      booties:
+        ==: org.bukkit.inventory.ItemStack
+        type: GOLD_BOOTS
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §b§lSpirit Booties
+          lore:
+          - §6To only be used with a spirit.
+          enchants:
+            DURABILITY: 10
+  warrior:
+    description: An offensive class that is focused on battle.
+    alpha: The ability to 1 - Hit KO any mob for 10 seconds. (Not including bosses.)
+    omega: Recieve a battle axe that allows for a super - knockback for every mob around you. (3 time use.)
+    data:
+      weapon:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_SWORD
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §c§lWarrior Sword
+          lore:
+          - §6To only be used with a warrior.
+          enchants:
+            DURABILITY: 10
+      helmet:
+        ==: org.bukkit.inventory.ItemStack
+        type: DIAMOND_HELMET
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §c§lWarrior Helmet
+          lore:
+          - §6To only be used with a warrior.
+          enchants:
+            DURABILITY: 10
+      chestplate:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_CHESTPLATE
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §c§lWarrior Chestplate
+          lore:
+          - §6To only be used with a warrior.
+          enchants:
+            DURABILITY: 10
+      trousers:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_LEGGINGS
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §c§lWarrior Trousers
+          lore:
+          - §6To only be used with a warrior.
+          enchants:
+            DURABILITY: 10
+      booties:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_BOOTS
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §c§lWarrior Booties
+          lore:
+          - §6To only be used with a warrior.
+          enchants:
+            DURABILITY: 10
+  inferno:
+    description: An offensive class that is focused on fire and strategy.
+    alpha: The ability to shoot small fireballs at mobs for 30 seconds.
+    omega: Forge a fire - ring that sets all mobs around you on fire for an infinite amount of time. (1 time use.)
+    data:
+      weapon:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_SWORD
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §4§lInferno Sword
+          lore:
+          - §6To only be used with an inferno.
+          enchants:
+            DURABILITY: 10
+      helmet:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_HELMET
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §4§lInferno Helmet
+          lore:
+          - §6To only be used with an inferno.
+          enchants:
+            DURABILITY: 10
+      chestplate:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_CHESTPLATE
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §4§lInferno Chestplate
+          lore:
+          - §6To only be used with an inferno.
+          enchants:
+            DURABILITY: 10
+      trousers:
+        ==: org.bukkit.inventory.ItemStack
+        type: LEATHER_LEGGINGS
+        meta:
+          ==: ItemMeta
+          meta-type: LEATHER_ARMOR
+          display-name: §4§lInferno Trousers
+          lore:
+          - §6To only be used with an inferno.
+          enchants:
+            DURABILITY: 10
+      booties:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_BOOTS
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §4§lInferno Booties
+          lore:
+          - §6To only be used with an inferno.
+          enchants:
+            DURABILITY: 10
+  roadrunner:
+    description: A defensive class that is focused on speed and manuveuring.
+    alpha: Give yourself Speed IV for 1 minute.
+    omega: Give everyone including yourself Speed IV for 1 minute.
+    data:
+      weapon:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_SWORD
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §a§lRoadrunner Sword
+          lore:
+          - §6To only be used with a roadrunner.
+          enchants:
+            DURABILITY: 10
+      helmet:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_HELMET
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §a§lRoadrunner Helmet
+          lore:
+          - §6To only be used with a roadrunner.
+          enchants:
+            DURABILITY: 10
+      chestplate:
+        ==: org.bukkit.inventory.ItemStack
+        type: GOLD_CHESTPLATE
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §a§lRoadrunner Chestplate
+          lore:
+          - §6To only be used with a roadrunner.
+          enchants:
+            DURABILITY: 10
+      trousers:
+        ==: org.bukkit.inventory.ItemStack
+        type: IRON_LEGGINGS
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §a§lRoadrunner Trousers
+          lore:
+          - §6To only be used with a roadrunner.
+          enchants:
+            DURABILITY: 10
+      booties:
+        ==: org.bukkit.inventory.ItemStack
+        type: GOLD_BOOTS
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §a§lRoadrunner Booties
+          lore:
+          - §6To only be used with a roadrunner.
+          enchants:
+            DURABILITY: 10
+  sniper:
+    description: An offensive class that is focused on stealth and fast actions.
+    alpha: Headshot (1 - Hit KO) all mobs you shoot for 20 seconds.
+    omega: Send a barrage of arrows all around you at all mobs. (1 time use.)
+    data:
+      weapon:
+        ==: org.bukkit.inventory.ItemStack
+        type: BOW
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          display-name: §d§lSniper Bow
+          lore:
+          - §6To only be used with a sniper.
+          enchants:
+            DURABILITY: 10
+            ARROW_INFINITE: 1
+            ARROW_DAMAGE: 2
+      helmet:
+        ==: org.bukkit.inventory.ItemStack
+        type: LEATHER_HELMET
+        meta:
+          ==: ItemMeta
+          meta-type: LEATHER_ARMOR
+          display-name: §d§lSniper Helmet
+          lore:
+          - §6To only be used with a sniper.
+          enchants:
+            DURABILITY: 10
+            PROTECTION_ENVIRONMENTAL: 1
+      chestplate:
+        ==: org.bukkit.inventory.ItemStack
+        type: LEATHER_CHESTPLATE
+        meta:
+          ==: ItemMeta
+          meta-type: LEATHER_ARMOR
+          display-name: §d§lSniper Chestplate
+          lore:
+          - §6To only be used with a sniper.
+          enchants:
+            DURABILITY: 10
+            PROTECTION_ENVIRONMENTAL: 1
+      trousers:
+        ==: org.bukkit.inventory.ItemStack
+        type: LEATHER_LEGGINGS
+        meta:
+          ==: ItemMeta
+          meta-type: LEATHER_ARMOR
+          display-name: §d§lSniper Trousers
+          lore:
+          - §6To only be used with a sniper.
+          enchants:
+            DURABILITY: 10
+            PROTECTION_ENVIRONMENTAL: 1
+      booties:
+        ==: org.bukkit.inventory.ItemStack
+        type: LEATHER_BOOTS
+        meta:
+          ==: ItemMeta
+          meta-type: LEATHER_ARMOR
+          display-name: §d§lSniper Booties
+          lore:
+          - §6To only be used with a sniper.
+          enchants:
+            DURABILITY: 10
+            PROTECTION_ENVIRONMENTAL: 1
