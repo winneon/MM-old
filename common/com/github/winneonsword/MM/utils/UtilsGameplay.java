@@ -1,6 +1,8 @@
 package com.github.winneonsword.MM.utils;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import com.github.winneonsword.MM.ClassData;
@@ -33,6 +35,12 @@ public class UtilsGameplay extends UtilsMM {
 		this.inven.setItem(0, data.getWeapon());
 		this.inven.setItem(7, data.getAlphaDisc());
 		this.inven.setItem(8, data.getOmegaDisc());
+		
+		if (this.clazz.equals("sniper")){
+			
+			this.inven.setItem(9, new ItemStack(Material.ARROW, 1));
+			
+		}
 		
 	}
 	

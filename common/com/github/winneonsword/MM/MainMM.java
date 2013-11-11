@@ -1,12 +1,16 @@
 package com.github.winneonsword.MM;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -165,6 +169,51 @@ public class MainMM extends JavaPlugin {
 			
 		}
 		
+		if (!(configFile.exists())){
+			
+			configFile.getParentFile().mkdirs();
+			this.copy(this.getResource("config.yml"), configFile);
+			
+		}
+		
+		if (!(datacoreFile.exists())){
+			
+			datacoreFile.getParentFile().mkdirs();
+			this.copy(this.getResource("datacore.yml"), datacoreFile);
+			
+		}
+		
+		if (!(helpFile.exists())){
+			
+			helpFile.getParentFile().mkdirs();
+			this.copy(this.getResource("help.yml"), helpFile);
+			
+		}
+		
+	}
+	
+	private void copy(InputStream in, File file){
+		
+		try {
+			
+			OutputStream out = new FileOutputStream(file);
+			byte[] buf = new byte[1024];
+			int len;
+			
+			while ((len = in.read(buf)) > 0){
+				
+				out.write(buf, 0, len);
+				
+			}
+			
+			out.close();
+			in.close();
+			
+		} catch (Exception e){
+			
+			e.printStackTrace();
+			
+		}
 	}
 	
 	private void setClassInfo(){
@@ -227,17 +276,89 @@ public class MainMM extends JavaPlugin {
 		
 		String[] c = UtilsMM.getClassArray();
 		
-		ItemStack medicWeapon = new ItemStack(Material.IRON_SWORD, 1);
-		ItemStack medicHelm = new ItemStack(Material.GOLD_HELMET, 1);
-		ItemStack medicChest = new ItemStack(Material.GOLD_CHESTPLATE, 1);
-		ItemStack medicTrousers = new ItemStack(Material.GOLD_LEGGINGS, 1);
-		ItemStack medicBooties = new ItemStack(Material.GOLD_BOOTS, 1);
+		ItemStack medicWeapon = this.api.invManager.makeItem(UtilsMM.AS("&6&lMedic Sword"), UtilsMM.AS("&6To only be used with a medic."), true, Enchantment.DURABILITY, 10, 0, Material.IRON_SWORD, 1);
+		ItemStack medicHelm = this.api.invManager.makeItem(UtilsMM.AS("&6&lMedic Helmet"), UtilsMM.AS("&6To only be used with a medic."), true, Enchantment.DURABILITY, 10, 0, Material.GOLD_HELMET, 1);
+		ItemStack medicChest = this.api.invManager.makeItem(UtilsMM.AS("&6&lMedic Chestplate"), UtilsMM.AS("&6To only be used with a medic."), true, Enchantment.DURABILITY, 10, 0, Material.GOLD_CHESTPLATE, 1);
+		ItemStack medicTrousers = this.api.invManager.makeItem(UtilsMM.AS("&6&lMedic Trousers"), UtilsMM.AS("&6To only be used with a medic."), true, Enchantment.DURABILITY, 10, 0, Material.GOLD_LEGGINGS, 1);
+		ItemStack medicBooties = this.api.invManager.makeItem(UtilsMM.AS("&6&lMedic Booties"), UtilsMM.AS("&6To only be used with a medic."), true, Enchantment.DURABILITY, 10, 0, Material.GOLD_BOOTS, 1);
+		
+		medicHelm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+		medicChest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+		medicTrousers.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+		medicBooties.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+		
+		ItemStack spiritWeapon = this.api.invManager.makeItem(UtilsMM.AS("&b&lSpirit Sword"), UtilsMM.AS("&6To only be used with a spirit."), true, Enchantment.DURABILITY, 10, 0, Material.IRON_SWORD, 1);
+		ItemStack spiritHelm = this.api.invManager.makeItem(UtilsMM.AS("&b&lSpirit Helmet"), UtilsMM.AS("&6To only be used with a spirit."), true, Enchantment.DURABILITY, 10, 0, Material.GOLD_HELMET, 1);
+		ItemStack spiritChest = this.api.invManager.makeItem(UtilsMM.AS("&b&lSpirit Chestplate"), UtilsMM.AS("&6To only be used with a spirit."), true, Enchantment.DURABILITY, 10, 0, Material.IRON_CHESTPLATE, 1);
+		ItemStack spiritTrousers = this.api.invManager.makeItem(UtilsMM.AS("&b&lSpirit Trousers"), UtilsMM.AS("&6To only be used with a spirit."), true, Enchantment.DURABILITY, 10, 0, Material.IRON_LEGGINGS, 1);
+		ItemStack spiritBooties = this.api.invManager.makeItem(UtilsMM.AS("&b&lSpirit Booties"), UtilsMM.AS("&6To only be used with a spirit."), true, Enchantment.DURABILITY, 10, 0, Material.GOLD_BOOTS, 1);
+		
+		ItemStack warriorWeapon = this.api.invManager.makeItem(UtilsMM.AS("&c&lWarrior Sword"), UtilsMM.AS("&6To only be used with a warrior."), true, Enchantment.DURABILITY, 10, 0, Material.IRON_SWORD, 1);
+		ItemStack warriorHelm = this.api.invManager.makeItem(UtilsMM.AS("&c&lWarrior Helmet"), UtilsMM.AS("&6To only be used with a warrior."), true, Enchantment.DURABILITY, 10, 0, Material.DIAMOND_HELMET, 1);
+		ItemStack warriorChest = this.api.invManager.makeItem(UtilsMM.AS("&c&lWarrior Chestplate"), UtilsMM.AS("&6To only be used with a warrior."), true, Enchantment.DURABILITY, 10, 0, Material.IRON_CHESTPLATE, 1);
+		ItemStack warriorTrousers = this.api.invManager.makeItem(UtilsMM.AS("&c&lWarrior Trousers"), UtilsMM.AS("&6To only be used with a warrior."), true, Enchantment.DURABILITY, 10, 0, Material.IRON_LEGGINGS, 1);
+		ItemStack warriorBooties = this.api.invManager.makeItem(UtilsMM.AS("&c&lWarrior Booties"), UtilsMM.AS("&6To only be used with a warrior."), true, Enchantment.DURABILITY, 10, 0, Material.IRON_BOOTS, 1);
+		
+		ItemStack infernoWeapon = this.api.invManager.makeItem(UtilsMM.AS("&4&lInferno Sword"), UtilsMM.AS("&6To only be used with an inferno."), true, Enchantment.DURABILITY, 10, 0, Material.IRON_SWORD, 1);
+		ItemStack infernoHelm = this.api.invManager.makeItem(UtilsMM.AS("&4&lInferno Helmet"), UtilsMM.AS("&6To only be used with an inferno."), true, Enchantment.DURABILITY, 10, 0, Material.IRON_HELMET, 1);
+		ItemStack infernoChest = this.api.invManager.makeItem(UtilsMM.AS("&4&lInferno Chestplate"), UtilsMM.AS("&6To only be used with an inferno."), true, Enchantment.DURABILITY, 10, 0, Material.IRON_CHESTPLATE, 1);
+		ItemStack infernoTrousers = this.api.invManager.makeItem(UtilsMM.AS("&4&lInferno Trousers"), UtilsMM.AS("&6To only be used with an inferno."), true, Enchantment.DURABILITY, 10, 0, Material.LEATHER_LEGGINGS, 1);
+		ItemStack infernoBooties = this.api.invManager.makeItem(UtilsMM.AS("&4&lInferno Booties"), UtilsMM.AS("&6To only be used with an inferno."), true, Enchantment.DURABILITY, 10, 0, Material.IRON_BOOTS, 1);
+		
+		ItemStack roadrunnerWeapon = this.api.invManager.makeItem(UtilsMM.AS("&a&lRoadrunner Sword"), UtilsMM.AS("&6To only be used with a roadrunner."), true, Enchantment.DURABILITY, 10, 0, Material.IRON_SWORD, 1);
+		ItemStack roadrunnerHelm = this.api.invManager.makeItem(UtilsMM.AS("&a&lRoadrunner Helmet"), UtilsMM.AS("&6To only be used with a roadrunner."), true, Enchantment.DURABILITY, 10, 0, Material.IRON_HELMET, 1);
+		ItemStack roadrunnerChest = this.api.invManager.makeItem(UtilsMM.AS("&a&lRoadrunner Chestplate"), UtilsMM.AS("&6To only be used with a roadrunner."), true, Enchantment.DURABILITY, 10, 0, Material.GOLD_CHESTPLATE, 1);
+		ItemStack roadrunnerTrousers = this.api.invManager.makeItem(UtilsMM.AS("&a&lRoadrunner Trousers"), UtilsMM.AS("&6To only be used with a roadrunner."), true, Enchantment.DURABILITY, 10, 0, Material.IRON_LEGGINGS, 1);
+		ItemStack roadrunnerBooties = this.api.invManager.makeItem(UtilsMM.AS("&a&lRoadrunner Booties"), UtilsMM.AS("&6To only be used with a roadrunner."), true, Enchantment.DURABILITY, 10, 0, Material.GOLD_BOOTS, 1);
+		
+		ItemStack sniperWeapon = this.api.invManager.makeItem(UtilsMM.AS("&d&lSniper Bow"), UtilsMM.AS("&6To only be used with a sniper."), true, Enchantment.DURABILITY, 10, 0, Material.BOW, 1);
+		ItemStack sniperHelm = this.api.invManager.makeItem(UtilsMM.AS("&d&lSniper Helmet"), UtilsMM.AS("&6To only be used with a sniper."), true, Enchantment.DURABILITY, 10, 0, Material.LEATHER_HELMET, 1);
+		ItemStack sniperChest = this.api.invManager.makeItem(UtilsMM.AS("&d&lSniper Chestplate"), UtilsMM.AS("&6To only be used with a sniper."), true, Enchantment.DURABILITY, 10, 0, Material.LEATHER_CHESTPLATE, 1);
+		ItemStack sniperTrousers = this.api.invManager.makeItem(UtilsMM.AS("&d&lSniper Trousers"), UtilsMM.AS("&6To only be used with a sniper."), true, Enchantment.DURABILITY, 10, 0, Material.LEATHER_LEGGINGS, 1);
+		ItemStack sniperBooties = this.api.invManager.makeItem(UtilsMM.AS("&d&lSniper Booties"), UtilsMM.AS("&6To only be used with a sniper."), true, Enchantment.DURABILITY, 10, 0, Material.LEATHER_BOOTS, 1);
+		
+		sniperWeapon.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
+		sniperWeapon.addEnchantment(Enchantment.ARROW_INFINITE, 1);
+		sniperHelm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+		sniperChest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+		sniperTrousers.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+		sniperBooties.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
 		
 		this.datacore.set("Classes." + c[0] + ".data.weapon", medicWeapon);
 		this.datacore.set("Classes." + c[0] + ".data.helmet", medicHelm);
 		this.datacore.set("Classes." + c[0] + ".data.chestplate", medicChest);
 		this.datacore.set("Classes." + c[0] + ".data.trousers", medicTrousers);
 		this.datacore.set("Classes." + c[0] + ".data.booties", medicBooties);
+		
+		this.datacore.set("Classes." + c[1] + ".data.weapon", spiritWeapon);
+		this.datacore.set("Classes." + c[1] + ".data.helmet", spiritHelm);
+		this.datacore.set("Classes." + c[1] + ".data.chestplate", spiritChest);
+		this.datacore.set("Classes." + c[1] + ".data.trousers", spiritTrousers);
+		this.datacore.set("Classes." + c[1] + ".data.booties", spiritBooties);
+		
+		this.datacore.set("Classes." + c[2] + ".data.weapon", warriorWeapon);
+		this.datacore.set("Classes." + c[2] + ".data.helmet", warriorHelm);
+		this.datacore.set("Classes." + c[2] + ".data.chestplate", warriorChest);
+		this.datacore.set("Classes." + c[2] + ".data.trousers", warriorTrousers);
+		this.datacore.set("Classes." + c[2] + ".data.booties", warriorBooties);
+		
+		this.datacore.set("Classes." + c[3] + ".data.weapon", infernoWeapon);
+		this.datacore.set("Classes." + c[3] + ".data.helmet", infernoHelm);
+		this.datacore.set("Classes." + c[3] + ".data.chestplate", infernoChest);
+		this.datacore.set("Classes." + c[3] + ".data.trousers", infernoTrousers);
+		this.datacore.set("Classes." + c[3] + ".data.booties", infernoBooties);
+		
+		this.datacore.set("Classes." + c[4] + ".data.weapon", roadrunnerWeapon);
+		this.datacore.set("Classes." + c[4] + ".data.helmet", roadrunnerHelm);
+		this.datacore.set("Classes." + c[4] + ".data.chestplate", roadrunnerChest);
+		this.datacore.set("Classes." + c[4] + ".data.trousers", roadrunnerTrousers);
+		this.datacore.set("Classes." + c[4] + ".data.booties", roadrunnerBooties);
+		
+		this.datacore.set("Classes." + c[5] + ".data.weapon", sniperWeapon);
+		this.datacore.set("Classes." + c[5] + ".data.helmet", sniperHelm);
+		this.datacore.set("Classes." + c[5] + ".data.chestplate", sniperChest);
+		this.datacore.set("Classes." + c[5] + ".data.trousers", sniperTrousers);
+		this.datacore.set("Classes." + c[5] + ".data.booties", sniperBooties);
 		
 		this.saveYMLs();
 		
