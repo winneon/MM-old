@@ -16,7 +16,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.github.lyokofirelyte.WCAPI.WCAPI;
 import com.github.lyokofirelyte.WCAPI.WCManager;
 import com.github.winneonsword.MM.commands.MMCommand;
-import com.github.winneonsword.MM.events.MiscMM;
+import com.github.winneonsword.MM.events.EntityDeath;
+import com.github.winneonsword.MM.events.MiscEvents;
 import com.github.winneonsword.MM.utils.UtilsMM;
 
 public class MainMM extends JavaPlugin {
@@ -115,7 +116,8 @@ public class MainMM extends JavaPlugin {
 	
 	private void registerListeners(){
 		
-		this.pm.registerEvents(new MiscMM(this), this);
+		this.pm.registerEvents(new MiscEvents(this), this);
+		this.pm.registerEvents(new EntityDeath(this), this);
 		
 	}
 	
@@ -185,6 +187,8 @@ public class MainMM extends JavaPlugin {
 			this.copy(this.getResource("help.yml"), helpFile);
 			
 		}
+		
+		this.datacore.set("round", 0);
 		
 	}
 	

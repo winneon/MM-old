@@ -17,9 +17,13 @@ import com.github.winneonsword.MM.utils.UtilsMM;
 
 public class MMCommand extends UtilsMM implements CommandExecutor {
 	
+	private Gameplay game;
+	
 	public MMCommand(MainMM pl){
 		
 		super(pl);
+		
+		this.game = new Gameplay(this.pl);
 		
 	}
 	
@@ -291,10 +295,8 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 						this.s(p, "&cThere are not at least 5 people in MM yet!");
 						
 					} else {
-						
-						Gameplay game = new Gameplay(this.pl);
-						
-						game.startGame();
+											
+						this.game.startGame();
 						
 					}
 					

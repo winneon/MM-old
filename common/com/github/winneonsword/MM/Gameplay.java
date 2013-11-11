@@ -1,6 +1,8 @@
 package com.github.winneonsword.MM;
 
 import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
@@ -9,6 +11,8 @@ import com.github.winneonsword.MM.utils.UtilsMM;
 
 public class Gameplay extends UtilsGameplay implements Listener {
 	
+	private World world;
+	
 	private String[] welcome;
 	private int runWelcome;
 	private int welcomeSlide;
@@ -16,6 +20,8 @@ public class Gameplay extends UtilsGameplay implements Listener {
 	public Gameplay(MainMM pl){
 		
 		super(pl);
+		
+		this.world = this.getArenaW();
 		
 	}
 	
@@ -33,6 +39,8 @@ public class Gameplay extends UtilsGameplay implements Listener {
 			
 		}
 		
+		this.setGameRule(world, "doDaylightCycle", false);
+		this.setTime(world, 18000L);
 		this.welcomePlayers();
 		
 	}
@@ -47,6 +55,9 @@ public class Gameplay extends UtilsGameplay implements Listener {
 			
 			this.setVariables(p);
 			this.clearInven();
+			
+			this.setGameRule(world, "doDaylightCycle", true);
+			this.setTime(world, 0L);
 			
 			this.sMM("Mob Mondays has ended! Thank you for playing, warping you to spawn.");
 			
@@ -67,7 +78,8 @@ public class Gameplay extends UtilsGameplay implements Listener {
 	
 	public void beginRound(int round){
 		
-		this.setRound(round);
+		int test = this.setRound(round);
+		Bukkit.broadcastMessage(String.valueOf(test));
 		
 		switch (round){
 		
@@ -86,6 +98,22 @@ public class Gameplay extends UtilsGameplay implements Listener {
 			}, 40L);
 			
 			break;
+			
+		case 1:
+			
+			this.sMM("Round 1 has begun!");
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.ZOMBIE, 50);
+			break;
+			
+		}
+		
+	}
+	
+	public void checkRoundChange(int mobs, int nextRound){
+		
+		if (mobs == this.totalKilled){
+			
+			this.beginRound(nextRound);
 			
 		}
 		
@@ -131,7 +159,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 	
 	private void checkWelcome(){
 		
-		if (this.welcomeSlide >= this.welcome.length){
+		if (this.welcomeSlide == this.welcome.length){
 			
 			Bukkit.getServer().getScheduler().cancelTask(this.runWelcome);
 			this.beginRound(1);

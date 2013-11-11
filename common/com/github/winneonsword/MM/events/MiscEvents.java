@@ -9,9 +9,9 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import com.github.winneonsword.MM.MainMM;
 import com.github.winneonsword.MM.utils.UtilsMM;
 
-public class MiscMM extends UtilsMM implements Listener {
+public class MiscEvents extends UtilsMM implements Listener {
 	
-	public MiscMM(MainMM pl){
+	public MiscEvents(MainMM pl){
 		
 		super(pl);
 		

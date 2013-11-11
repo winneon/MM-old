@@ -3,6 +3,7 @@ package com.github.winneonsword.MM.utils;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
@@ -303,6 +304,15 @@ public class UtilsMM {
 			
 			return true;
 		}
+		
+	}
+	
+	public static int randomize(int within){
+		
+		Random rand = new Random();
+		int random = rand.nextInt(within) + 1;
+		
+		return random;
 		
 	}
 	
