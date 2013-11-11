@@ -81,10 +81,10 @@ public class UtilsGameplay extends UtilsMM {
 			
 			public void run(){
 				
+				checkWelcome();
+				
 				UtilsMM.sMM(welcome[welcomeSlide]);
 				welcomeSlide++;
-				
-				checkWelcome();
 				
 			}
 			
@@ -94,7 +94,7 @@ public class UtilsGameplay extends UtilsMM {
 	
 	private void checkWelcome(){
 		
-		if (this.welcomeSlide > this.welcome.length){
+		if (this.welcomeSlide >= this.welcome.length){
 			
 			Bukkit.getServer().getScheduler().cancelTask(this.runWelcome);
 			
