@@ -1,8 +1,5 @@
 package com.github.winneonsword.MM.utils;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -19,8 +16,7 @@ public class UtilsGameplay extends UtilsMM {
 	private String clazz;
 	private ClassData data = null;
 	
-	private String[] welcomeA;
-	private List<String> welcome;
+	private String[] welcome;
 	private int runWelcome;
 	private int welcomeSlide;
 	
@@ -60,7 +56,7 @@ public class UtilsGameplay extends UtilsMM {
 	
 	public void welcomePlayers(){
 		
-		this.welcomeA = UtilsMM.AS(new String[] {
+		this.welcome = UtilsMM.AS(new String[] {
 				
 				"Welcome to Mob Mondays!",
 				"Please read carefully for the rules!",
@@ -79,14 +75,13 @@ public class UtilsGameplay extends UtilsMM {
 				
 		});
 		
-		this.welcome = Arrays.asList(welcomeA);
 		this.welcomeSlide = 0;
 		
 		this.runWelcome = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.pl, new Runnable(){
 			
 			public void run(){
 				
-				UtilsMM.sMM(welcome.get(welcomeSlide));
+				UtilsMM.sMM(welcome[welcomeSlide]);
 				welcomeSlide++;
 				
 				checkWelcome();
@@ -99,9 +94,9 @@ public class UtilsGameplay extends UtilsMM {
 	
 	private void checkWelcome(){
 		
-		if (this.welcomeSlide > this.welcome.size()){
+		if (this.welcomeSlide > this.welcome.length){
 			
-			Bukkit.getServer().getScheduler().cancelTask(runWelcome);
+			Bukkit.getServer().getScheduler().cancelTask(this.runWelcome);
 			
 		}
 		
