@@ -55,6 +55,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 				public void run(){
 					
 					finalP.performCommand("s");
+					UtilsMM.removePlayer(finalP);
 					
 				}
 				
@@ -73,7 +74,17 @@ public class Gameplay extends UtilsGameplay implements Listener {
 		default:
 			
 			this.sMM("An unknown round has started! Stopping MM.");
-			this.endGame();
+			
+			this.delay(this.pl, new Runnable(){
+				
+				public void run(){
+					
+					endGame();
+					
+				}
+				
+			}, 40L);
+			
 			break;
 			
 		}
