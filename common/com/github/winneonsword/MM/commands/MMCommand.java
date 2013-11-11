@@ -347,8 +347,7 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 					
 				}
 				
-				this.pl.datacore.set("playerList", this.getPlayerList());
-				this.pl.saveYMLs();
+				this.saveVariables();
 				
 			}
 			

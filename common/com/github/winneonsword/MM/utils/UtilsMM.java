@@ -276,6 +276,18 @@ public class UtilsMM {
 		
 	}
 	
+	public static void saveVariables(){
+		
+		pl.datacore.set("playerList", UtilsMM.getPlayerList());
+		pl.datacore.set("arenaLoc.arenaX", UtilsMM.getArenaX());
+		pl.datacore.set("arenaLoc.arenaY", UtilsMM.getArenaY());
+		pl.datacore.set("arenaLoc.arenaZ", UtilsMM.getArenaZ());
+		pl.datacore.set("arenaLoc.arenaW", UtilsMM.getArenaW().getName());
+		
+		pl.saveYMLs();
+		
+	}
+	
 	private void setVariables(){
 		
 		this.changingClass = new HashMap<String, String>();
