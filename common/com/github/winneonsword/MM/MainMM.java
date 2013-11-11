@@ -169,7 +169,7 @@ public class MainMM extends JavaPlugin {
 	
 	private void saveDisableVariables(){
 		
-		this.datacore.set("playerList", UtilsMM.playerList);
+		this.datacore.set("playerList", UtilsMM.getPlayerList());
 		this.datacore.set("arenaLoc.arenaX", UtilsMM.getArenaX());
 		this.datacore.set("arenaLoc.arenaY", UtilsMM.getArenaY());
 		this.datacore.set("arenaLoc.arenaZ", UtilsMM.getArenaZ());

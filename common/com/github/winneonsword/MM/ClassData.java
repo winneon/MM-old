@@ -1,9 +1,10 @@
 package com.github.winneonsword.MM;
 
-import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 import com.github.winneonsword.MM.exceptions.InvalidClassException;
@@ -44,23 +45,10 @@ public class ClassData {
 					
 			};
 			
-			this.alpha = new ItemStack(Material.GREEN_RECORD, 1);
-			this.omega = new ItemStack(Material.GOLD_RECORD, 1);
+			ArrayUtils.reverse(armour);
 			
-			String[] loreA = {
-					
-					"&6Right click to",
-					"&6activate me!"
-					
-			};
-			
-			List<String> lore = Arrays.asList(UtilsMM.AS(loreA));
-			
-			this.alpha.getItemMeta().setDisplayName(UtilsMM.AS("&2&lAlpha Ablity"));
-			this.alpha.getItemMeta().setLore(lore);
-			
-			this.omega.getItemMeta().setDisplayName(UtilsMM.AS("&6&lOmega Ablity"));
-			this.omega.getItemMeta().setLore(lore);
+			this.alpha = UtilsMM.pl.api.invManager.makeItem(UtilsMM.AS("&2&lAlpha Ability"), UtilsMM.AS("&6Right click me!"), false, Enchantment.DURABILITY, 0, Material.GREEN_RECORD, 1);
+			this.omega = UtilsMM.pl.api.invManager.makeItem(UtilsMM.AS("&6&lOmega Ability"), UtilsMM.AS("&6Right click me!"), false, Enchantment.DURABILITY, 0, Material.GOLD_RECORD, 1);
 			
 		} else {
 			

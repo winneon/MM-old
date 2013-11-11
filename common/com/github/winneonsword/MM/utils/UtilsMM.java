@@ -23,7 +23,6 @@ public class UtilsMM {
 	public static HashMap<String, String> changingClass;
 	public static String WC;
 	public static boolean toggle;
-	public static List<String> playerList;
 	
 	private static int arenaX;
 	private static int arenaY;
@@ -31,6 +30,7 @@ public class UtilsMM {
 	private static World arenaW;
 	
 	private static Location arenaLoc;
+	private static List<String> playerList;
 	
 	public UtilsMM(MainMM plugin){
 		

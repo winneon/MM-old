@@ -18,8 +18,9 @@ public class Gameplay extends UtilsGameplay implements Listener {
 		
 		// Warning! Do not run this method several times in a row!
 		
-		for (String pl : this.getPlayerList()){
+		for (int i = 0; i < this.getPlayerList().size(); i++){
 			
+			String pl = this.getPlayerList().get(i);
 			Player p = Bukkit.getPlayer(pl);
 			
 			this.setVariables(p);
