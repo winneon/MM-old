@@ -114,7 +114,7 @@ public class MainMM extends JavaPlugin {
 	
 	private void registerListeners(){
 		
-		
+		// None! :(
 		
 	}
 	

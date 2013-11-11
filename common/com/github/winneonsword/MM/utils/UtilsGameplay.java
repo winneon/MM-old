@@ -26,6 +26,7 @@ public class UtilsGameplay extends UtilsMM {
 		
 		this.inven.clear();
 		this.giveClassItems();
+		this.giveStandardItems();
 		
 	}
 	
@@ -33,14 +34,19 @@ public class UtilsGameplay extends UtilsMM {
 		
 		this.inven.setArmorContents(data.getArmour());
 		this.inven.setItem(0, data.getWeapon());
-		this.inven.setItem(7, data.getAlphaDisc());
-		this.inven.setItem(8, data.getOmegaDisc());
 		
 		if (this.clazz.equals("sniper")){
 			
 			this.inven.setItem(9, new ItemStack(Material.ARROW, 1));
 			
 		}
+		
+	}
+	
+	public void giveStandardItems(){
+		
+		this.inven.setItem(7, data.getAlphaDisc());
+		this.inven.setItem(8, data.getOmegaDisc());
 		
 	}
 	
