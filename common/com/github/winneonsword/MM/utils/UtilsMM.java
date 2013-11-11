@@ -77,6 +77,36 @@ public class UtilsMM {
 		
 	}
 	
+	public static void sMM(String message){
+		
+		for (int i = 0; i < getPlayerList().size(); i++){
+			
+			String pl = getPlayerList().get(i);
+			Player p = Bukkit.getPlayer(pl);
+			
+			p.sendMessage(AS(WC + message));
+			
+		}
+		
+	}
+	
+	public static void sMM(String[] message){
+		
+		for (int i = 0; i < getPlayerList().size(); i++){
+			
+			String pl = getPlayerList().get(i);
+			Player p = Bukkit.getPlayer(pl);
+			
+			for (int b = 0; i < message.length; i++){
+				
+				p.sendMessage(AS(message[b]));
+				
+			}
+			
+		}
+		
+	}
+	
 	public static void blankS(Player p, String message){
 		
 		p.sendMessage(AS(message));

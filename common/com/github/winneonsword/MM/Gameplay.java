@@ -28,6 +28,8 @@ public class Gameplay extends UtilsGameplay implements Listener {
 			
 		}
 		
+		this.welcomePlayers();
+		
 	}
 	
 }
