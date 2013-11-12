@@ -18,6 +18,7 @@ import com.github.lyokofirelyte.WCAPI.WCManager;
 import com.github.winneonsword.MM.commands.MMCommand;
 import com.github.winneonsword.MM.events.EntityDeath;
 import com.github.winneonsword.MM.events.MiscEvents;
+import com.github.winneonsword.MM.utils.UtilsGameplay;
 import com.github.winneonsword.MM.utils.UtilsMM;
 
 public class MainMM extends JavaPlugin {
@@ -25,6 +26,7 @@ public class MainMM extends JavaPlugin {
 	public WCAPI api;
 	public WCManager wcm;
 	public PluginManager pm;
+	public UtilsGameplay utils;
 	
 	public static YamlConfiguration config = new YamlConfiguration();
 	public static YamlConfiguration datacore = new YamlConfiguration();
@@ -44,6 +46,7 @@ public class MainMM extends JavaPlugin {
 		this.api = (WCAPI) WCAPI;
 		this.wcm = new WCManager(api);
 		this.pm = this.getServer().getPluginManager();
+		this.utils = new UtilsGameplay(this);
 		
 		try {
 			

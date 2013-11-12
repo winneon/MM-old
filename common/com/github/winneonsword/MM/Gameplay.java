@@ -78,8 +78,8 @@ public class Gameplay extends UtilsGameplay implements Listener {
 	
 	public void beginRound(int round){
 		
-		int test = this.setRound(round);
-		Bukkit.broadcastMessage(String.valueOf(test));
+		this.pl.utils.setRound(round);
+		this.pl.utils.totalKilled = 0;
 		
 		switch (round){
 		
@@ -111,7 +111,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 	
 	public void checkRoundChange(int mobs, int nextRound){
 		
-		if (mobs == this.totalKilled){
+		if (mobs == this.pl.utils.totalKilled){
 			
 			this.beginRound(nextRound);
 			

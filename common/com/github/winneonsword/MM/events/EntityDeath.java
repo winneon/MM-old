@@ -1,6 +1,5 @@
 package com.github.winneonsword.MM.events;
 
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -26,20 +25,24 @@ public class EntityDeath extends UtilsGameplay implements Listener {
 	public void onEntityDeath(EntityDeathEvent e){
 		
 		int random = this.randomize(3);
-		Bukkit.broadcastMessage(String.valueOf(this.getRound()));
 		
-		switch (this.getRound()){
+		switch (this.pl.utils.getRound()){
 		
 		case 1:
 			
-			this.totalKilled++;
-			this.s(e.getEntity().getKiller(), "Killed: "+ totalKilled);
-			this.game.checkRoundChange(50, 2);
+			if (this.checkMobType(this.pl.utils.getRound(), e.getEntity())){
+				
+				this.pl.utils.totalKilled++;
+				this.s(e.getEntity().getKiller(), "Killed: "+ this.pl.utils.totalKilled);
+				this.game.checkRoundChange(50, 2);
+				
+			}
+			
 			break;
 			
 		}
 		
-		if (this.getRound() <= this.getTotalRounds()){
+		if (this.pl.utils.getRound() <= this.pl.utils.getTotalRounds()){
 			
 			e.getDrops().clear();
 			

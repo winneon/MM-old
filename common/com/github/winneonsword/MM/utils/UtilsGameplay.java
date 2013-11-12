@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -16,17 +17,16 @@ import com.github.winneonsword.MM.exceptions.InvalidClassException;
 public class UtilsGameplay extends UtilsMM {
 	
 	public int totalKilled;
-	public int round;
 	
 	private PlayerInventory inven;
 	private String clazz;
 	private ClassData data = null;
 	
+	private int round;
+	
 	public UtilsGameplay(MainMM pl){
 		
 		super(pl);
-		
-		this.round = this.pl.datacore.getInt("round");
 		
 	}
 	
@@ -38,7 +38,7 @@ public class UtilsGameplay extends UtilsMM {
 	
 	public int setRound(int round){
 		
-		this.pl.datacore.set("round", round);
+		this.round = round;
 		
 		return this.round;
 		
@@ -105,6 +105,34 @@ public class UtilsGameplay extends UtilsMM {
 			Location loc = new Location(world, x, y, z);
 			
 			world.spawnEntity(loc, entity);
+			
+		}
+		
+	}
+	
+	public boolean checkMobType(int round, LivingEntity e){
+		
+		if (e.getKiller() instanceof Player){
+			
+			switch (round){
+			
+			case 1:
+				
+				if (e.getType() == EntityType.ZOMBIE){
+					
+					return true;
+					
+				}
+				
+				break;
+				
+			}
+			
+			return false;
+			
+		} else {
+			
+			return false;
 			
 		}
 		
