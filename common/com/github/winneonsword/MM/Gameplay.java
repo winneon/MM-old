@@ -60,6 +60,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 			this.setTime(world, 0L);
 			
 			this.sMM("Mob Mondays has ended! Thank you for playing, warping you to spawn.");
+			this.clearMobs(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), this.getArenaR());
 			
 			this.delay(this.pl, new Runnable(){
 				
@@ -128,6 +129,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 		if (mobs == this.pl.utils.totalKilled){
 			
 			UtilsMM.sMM("Round " + (nextRound - 1) + " has completed! Round " + nextRound + " will begin in 3 seconds.");
+			this.clearMobs(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), this.getArenaR());
 			
 			this.delay(this.pl, new Runnable(){
 				
