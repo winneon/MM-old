@@ -113,15 +113,31 @@ public class Gameplay extends UtilsGameplay implements Listener {
 			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.SKELETON, 70);
 			break;
 			
+		case 3:
+			
+			this.sMM("Round 3 has begun!");
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.SPIDER, 90);
+			break;
+			
 		}
 		
 	}
 	
-	public void checkRoundChange(int mobs, int nextRound){
+	public void checkRoundChange(int mobs, final int nextRound){
 		
 		if (mobs == this.pl.utils.totalKilled){
 			
-			this.beginRound(nextRound);
+			UtilsMM.sMM("Round " + (nextRound - 1) + " has completed! Round " + nextRound + " will begin in 3 seconds.");
+			
+			this.delay(this.pl, new Runnable(){
+				
+				public void run(){
+					
+					beginRound(nextRound);
+					
+				}
+				
+			}, 60L);
 			
 		}
 		

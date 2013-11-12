@@ -47,7 +47,7 @@ public class UtilsGameplay extends UtilsMM {
 	
 	public int getTotalRounds(){
 		
-		return 2;
+		return 3;
 		
 	}
 	
@@ -146,6 +146,16 @@ public class UtilsGameplay extends UtilsMM {
 			case 2:
 				
 				if (e.getType() == EntityType.SKELETON){
+					
+					return true;
+					
+				}
+				
+				break;
+				
+			case 3:
+				
+				if (e.getType() == EntityType.SPIDER){
 					
 					return true;
 					

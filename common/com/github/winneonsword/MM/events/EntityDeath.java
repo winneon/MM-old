@@ -27,41 +27,59 @@ public class EntityDeath extends UtilsGameplay implements Listener {
 		
 		int random = this.randomize(3);
 		
-		switch (this.pl.utils.getRound()){
-		
-		case 1:
+		if (e.getEntity().getKiller() instanceof Player){
 			
-			if (this.checkMobType(this.pl.utils.getRound(), e.getEntity())){
+			Player p = e.getEntity().getKiller();
+			
+			switch (this.pl.utils.getRound()){
+			
+			case 1:
 				
-				this.pl.utils.totalKilled++;
-				this.s(e.getEntity().getKiller(), "Killed: "+ this.pl.utils.totalKilled);
-				this.game.checkRoundChange(50, 2);
+				if (this.checkMobType(this.pl.utils.getRound(), e.getEntity())){
+					
+					this.pl.utils.totalKilled++;
+					this.s(p, "Killed: "+ this.pl.utils.totalKilled);
+					this.game.checkRoundChange(50, 2);
+					
+				}
+				
+				break;
+				
+			case 2:
+				
+				if (this.checkMobType(this.pl.utils.getRound(), e.getEntity())){
+					
+					this.pl.utils.totalKilled++;
+					this.s(p, "Killed: " + this.pl.utils.totalKilled);
+					this.game.checkRoundChange(70, 3);
+					
+				}
+				
+				break;
+				
+			case 3:
+				
+				if (this.checkMobType(this.pl.utils.getRound(), e.getEntity())){
+					
+					this.pl.utils.totalKilled++;
+					this.s(p, "Killed: " + this.pl.utils.totalKilled);
+					this.game.checkRoundChange(90, 4);
+					
+				}
+				
+				break;
 				
 			}
 			
-			break;
-			
-		case 2:
-			
-			if (this.checkMobType(this.pl.utils.getRound(), e.getEntity())){
+			if (this.pl.utils.getRound() != 0 && this.pl.utils.getRound() <= this.pl.utils.getTotalRounds() && e.getEntity().getLocation().distance(this.getArena()) <= this.getArenaR()){
 				
-				this.pl.utils.totalKilled++;
-				this.s(e.getEntity().getKiller(), "Killed: " + this.pl.utils.totalKilled);
-				this.game.checkRoundChange(70, 3);
+				e.getDrops().clear();
 				
-			}
-			
-			break;
-						
-		}
-		
-		if (this.pl.utils.getRound() != 0 && this.pl.utils.getRound() <= this.pl.utils.getTotalRounds() && e.getEntity().getKiller() instanceof Player && e.getEntity().getLocation().distance(this.getArena()) <= this.getArenaR()){
-			
-			e.getDrops().clear();
-			
-			if (random == 3){
-				
-				e.getDrops().add(this.getShard());
+				if (random == 3){
+					
+					e.getDrops().add(this.getShard());
+					
+				}
 				
 			}
 			
