@@ -57,6 +57,9 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 							"&5- &d/mm leave &5// &dLeave an MM game.",
 							"&5- &d/mm list &5// &dView the player list.",
 							"&5- &d/mm class <class | list> &5// &dStats of a class or the class list.",
+							"&5- &d/mm start &5// &dStart an MM game. &5(&dSTAFF ONLY&5)",
+							"&5- &d/mm stop &5// &dStop an MM game. THERE IS NO CONFIRM! &5(&dSTAFF ONLY&5)",
+							"&5- &d/mm toggle &5// &dToggle the open status of MM. &5(&dSTAFF ONLY&5)",
 							"&5- &d/mm disable &5// &dDisable Mob Mondays. &5(&dSTAFF ONLY&5)"
 							
 					};
@@ -277,8 +280,27 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 						
 					} else {
 						
-						this.setArena(p);
-						this.s(p, "Set the arena to &6" + this.getArenaX() + "&d, &6" + this.getArenaY() + "&d, &6" + this.getArenaZ() + "&d in world &6" + this.getArenaW().getName() + "&d!");
+						if (args.length == 1){
+							
+							this.setArena(p, 100);
+							this.s(p, "Set the arena to &6" + this.getArenaX() + "&d, &6" + this.getArenaY() + "&d, &6" + this.getArenaZ() + "&d in world &6" + this.getArenaW().getName() + " &dwith a default radius of &6" + this.getArenaR() + "&d!");
+							
+						} else {
+							
+							boolean check = this.parseInteger(args[1]);
+							
+							if (check){
+								
+								this.setArena(p, Integer.parseInt(args[1]));
+								this.s(p, "Set the arena to &6" + this.getArenaX() + "&d, &6" + this.getArenaY() + "&d, &6" + this.getArenaZ() + "&d in world &6" + this.getArenaW().getName() + " &dwith a radius of &6" + this.getArenaR() + "&d!");
+								
+							} else {
+								
+								this.s(p, "&cCorrect usage: /mm set [radius] - The radius MUST be a number.");
+								
+							}
+							
+						}
 						
 					}
 					
@@ -297,6 +319,20 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 					} else {
 											
 						this.game.startGame();
+						
+					}
+					
+					break;
+					
+				case "stop":
+					
+					if (!(p.hasPermission("wa.staff"))){
+						
+						this.s(p, "&cDoes it look like you have permission to use this?");
+						
+					} else {
+						
+						this.game.endGame();
 						
 					}
 					

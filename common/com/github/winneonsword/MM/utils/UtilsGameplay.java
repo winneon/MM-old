@@ -112,7 +112,7 @@ public class UtilsGameplay extends UtilsMM {
 	
 	public boolean checkMobType(int round, LivingEntity e){
 		
-		if (e.getKiller() instanceof Player){
+		if (e.getKiller() instanceof Player && e.getLocation().distance(this.getArena()) <= this.getArenaR()){
 			
 			switch (round){
 			

@@ -29,6 +29,7 @@ public class UtilsMM {
 	private static int arenaY;
 	private static int arenaZ;
 	private static World arenaW;
+	private static int arenaR;
 	
 	private static Location arenaLoc;
 	private static List<String> playerList;
@@ -284,13 +285,20 @@ public class UtilsMM {
 		
 	}
 	
-	public static void setArena(Player p){
+	public static int getArenaR(){
+		
+		return arenaR;
+		
+	}
+	
+	public static void setArena(Player p, int radius){
 		
 		arenaLoc = p.getLocation();
 		arenaX = arenaLoc.getBlockX();
 		arenaY = arenaLoc.getBlockY();
 		arenaZ = arenaLoc.getBlockZ();
 		arenaW = arenaLoc.getWorld();
+		arenaR = radius;
 		
 	}
 	
@@ -316,13 +324,30 @@ public class UtilsMM {
 		
 	}
 	
+	public static boolean parseInteger(String integer){
+		
+		try {
+			
+			Integer.parseInt(integer);
+			
+		} catch (NumberFormatException e){
+			
+			return false;
+			
+		}
+		
+		return true;
+		
+	}
+	
 	public static void saveVariables(){
 		
-		pl.datacore.set("playerList", UtilsMM.getPlayerList());
-		pl.datacore.set("arenaLoc.arenaX", UtilsMM.getArenaX());
-		pl.datacore.set("arenaLoc.arenaY", UtilsMM.getArenaY());
-		pl.datacore.set("arenaLoc.arenaZ", UtilsMM.getArenaZ());
-		pl.datacore.set("arenaLoc.arenaW", UtilsMM.getArenaW().getName());
+		pl.datacore.set("playerList", getPlayerList());
+		pl.datacore.set("arenaLoc.arenaX", getArenaX());
+		pl.datacore.set("arenaLoc.arenaY", getArenaY());
+		pl.datacore.set("arenaLoc.arenaZ", getArenaZ());
+		pl.datacore.set("arenaLoc.arenaW", getArenaW().getName());
+		pl.datacore.set("arenaLoc.arenaR", getArenaR());
 		
 		pl.saveYMLs();
 		
@@ -345,6 +370,7 @@ public class UtilsMM {
 			this.arenaZ = pl.datacore.getInt("arenaLoc.arenaZ");
 			this.arenaW = Bukkit.getWorld(pl.datacore.getString("arenaLoc.arenaW"));
 			this.arenaLoc = new Location(arenaW, arenaX, arenaY, arenaZ);
+			this.arenaR = pl.datacore.getInt("arenaLoc.arenaR");
 			
 		} catch (IllegalArgumentException e){
 			
@@ -353,6 +379,7 @@ public class UtilsMM {
 			this.arenaZ = 0;
 			this.arenaW = Bukkit.getWorlds().get(0);
 			this.arenaLoc = null;
+			this.arenaR = 0;
 			
 			Bukkit.getLogger().log(Level.SEVERE, "Failed to set the arena location! Set the arena with /mm set ASAP!");
 			e.printStackTrace();
