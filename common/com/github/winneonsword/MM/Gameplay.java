@@ -55,6 +55,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 			
 			this.setVariables(p);
 			this.clearInven();
+			this.clearArmour();
 			
 			this.setGameRule(world, "doDaylightCycle", true);
 			this.setTime(world, 0L);

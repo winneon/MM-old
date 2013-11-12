@@ -54,6 +54,7 @@ public class UtilsGameplay extends UtilsMM {
 	public void giveGameItems(){
 		
 		this.clearInven();
+		this.clearArmour();
 		this.giveClassItems();
 		this.giveStandardItems();
 		
