@@ -117,7 +117,7 @@ public class UtilsGameplay extends UtilsMM {
 		
 		for (Entity e : world.getEntities()){
 			
-			if (e.getLocation().distance(loc) <= radius){
+			if (e.getLocation().distance(loc) <= radius && !(e instanceof Player)){
 				
 				e.remove();
 				
