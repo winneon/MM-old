@@ -58,7 +58,7 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 							"&5- &d/mm list &5// &dView the player list.",
 							"&5- &d/mm class <class | list> &5// &dStats of a class or the class list.",
 							"&5- &d/mm start &5// &dStart an MM game. &5(&dSTAFF ONLY&5)",
-							"&5- &d/mm stop &5// &dStop an MM game. THERE IS NO CONFIRM! &5(&dSTAFF ONLY&5)",
+							"&5- &d/mm stop &5// &dStop an MM game. NO CONFIRM! &5(&dSTAFF ONLY&5)",
 							"&5- &d/mm toggle &5// &dToggle the open status of MM. &5(&dSTAFF ONLY&5)",
 							"&5- &d/mm disable &5// &dDisable Mob Mondays. &5(&dSTAFF ONLY&5)"
 							
