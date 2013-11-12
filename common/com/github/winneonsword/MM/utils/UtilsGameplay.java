@@ -65,6 +65,19 @@ public class UtilsGameplay extends UtilsMM {
 		
 	}
 	
+	public void clearArmour(){
+		
+		this.inven.setArmorContents(new ItemStack[] {
+				
+				new ItemStack(Material.AIR, 1),
+				new ItemStack(Material.AIR, 1),
+				new ItemStack(Material.AIR, 1),
+				new ItemStack(Material.AIR, 1)
+				
+		});
+		
+	}
+	
 	public void giveClassItems(){
 		
 		this.inven.setArmorContents(data.getArmour());
