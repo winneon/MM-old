@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -46,7 +47,7 @@ public class UtilsGameplay extends UtilsMM {
 	
 	public int getTotalRounds(){
 		
-		return 1;
+		return 2;
 		
 	}
 	
@@ -110,6 +111,22 @@ public class UtilsGameplay extends UtilsMM {
 		
 	}
 	
+	public void clearMobs(World world, int x, int y, int z, double radius){
+		
+		Location loc = new Location(world, x, y, z);
+		
+		for (Entity e : world.getEntities()){
+			
+			if (e.getLocation().distance(loc) <= radius){
+				
+				e.remove();
+				
+			}
+			
+		}
+		
+	}
+	
 	public boolean checkMobType(int round, LivingEntity e){
 		
 		if (e.getKiller() instanceof Player && e.getLocation().distance(this.getArena()) <= this.getArenaR()){
@@ -119,6 +136,16 @@ public class UtilsGameplay extends UtilsMM {
 			case 1:
 				
 				if (e.getType() == EntityType.ZOMBIE){
+					
+					return true;
+					
+				}
+				
+				break;
+				
+			case 2:
+				
+				if (e.getType() == EntityType.SKELETON){
 					
 					return true;
 					

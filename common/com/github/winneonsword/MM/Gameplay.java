@@ -81,6 +81,8 @@ public class Gameplay extends UtilsGameplay implements Listener {
 		this.pl.utils.setRound(round);
 		this.pl.utils.totalKilled = 0;
 		
+		this.clearMobs(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), this.getArenaR());
+		
 		switch (round){
 		
 		default:
@@ -103,6 +105,12 @@ public class Gameplay extends UtilsGameplay implements Listener {
 			
 			this.sMM("Round 1 has begun!");
 			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.ZOMBIE, 50);
+			break;
+			
+		case 2:
+			
+			this.sMM("Round 2 has begun!");
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.SKELETON, 70);
 			break;
 			
 		}
