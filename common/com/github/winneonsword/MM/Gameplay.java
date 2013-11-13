@@ -195,7 +195,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 	
 	private void checkWelcome(){
 		
-		if (this.welcomeSlide == this.welcome.length){
+		if (this.welcomeSlide >= (this.welcome.length - 1)){
 			
 			Bukkit.getServer().getScheduler().cancelTask(this.runWelcome);
 			this.beginRound(1);
