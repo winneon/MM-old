@@ -4,12 +4,14 @@ import com.github.winneonsword.MM.MainMM;
 
 public class UtilsMisc extends UtilsMM {
 	
+	public static boolean scoreboard;
+	
 	public UtilsMisc(MainMM pl){
 		
 		super(pl);
 		
 	}
 	
-	// Maybe something will go here someday!
+	// No methods yet!
 	
 }

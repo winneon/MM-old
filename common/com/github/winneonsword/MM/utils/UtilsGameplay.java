@@ -28,7 +28,6 @@ public class UtilsGameplay extends UtilsMM {
 	private ClassData data = null;
 	
 	private int round;
-	private boolean scoreboard;
 	
 	public UtilsGameplay(MainMM pl){
 		
@@ -112,6 +111,14 @@ public class UtilsGameplay extends UtilsMM {
 		
 	}
 	
+	public void setMobKills(int kills){
+		
+		this.mobKills = kills;
+		this.pl.datacore.set("Users." + this.p.getName() + ".mobKills", this.mobKills);
+		this.pl.saveYMLs();
+		
+	}
+	
 	public void incrementMobKills(int times){
 		
 		this.mobKills += times;
@@ -122,13 +129,13 @@ public class UtilsGameplay extends UtilsMM {
 	
 	public boolean getScoreboard(){
 		
-		return this.scoreboard;
+		return UtilsMisc.scoreboard;
 		
 	}
 	
 	public void setScoreboard(boolean bool){
 		
-		this.scoreboard = bool;
+		UtilsMisc.scoreboard = bool;
 		
 		for (int i = 0; i < getPlayerList().size(); i++){
 			
@@ -272,7 +279,7 @@ public class UtilsGameplay extends UtilsMM {
 	
 	private void setVariables(){
 		
-		this.scoreboard = false;
+		UtilsMisc.scoreboard = false;
 		
 	}
 	

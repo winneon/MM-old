@@ -1,5 +1,6 @@
 package com.github.winneonsword.MM.events;
 
+import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,21 +28,30 @@ public class ScoreboardMM extends UtilsGameplay implements Listener {
 	public void onScoreboard(ScoreboardUpdateEvent e){
 		
 		Player p = e.getPlayer();
-		Objective mm = p.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
+		Scoreboard board = p.getScoreboard();
+		Objective mm = board.getObjective(DisplaySlot.SIDEBAR);
 		
 		if (this.getScoreboard()){
+			
+			this.pl.utils.setVariables(p);
 			
 			if (mm == null){
 				
 				ScoreboardManager manager = Bukkit.getScoreboardManager();
-				Scoreboard board = manager.getNewScoreboard();
+				board = manager.getNewScoreboard();
 				mm = board.registerNewObjective("mm", "dummy");
 				
 				mm.setDisplaySlot(DisplaySlot.SIDEBAR);
+				this.pl.utils.setMobKills(0);
 				
 			}
 			
 			this.setScores(mm, p);
+			p.setScoreboard(board);
+			
+		} else {
+			
+			p.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
 			
 		}
 		
@@ -49,18 +59,23 @@ public class ScoreboardMM extends UtilsGameplay implements Listener {
 	
 	private void setScores(Objective obj, Player p){
 		
-		this.setVariables(p);
-		
 		Score round = obj.getScore(Bukkit.getOfflinePlayer(this.AS("&6Round:")));
-		Score clazz = obj.getScore(Bukkit.getOfflinePlayer(this.AS("&6Class: &e" + this.getClass(p))));
-		Score shards = obj.getScore(Bukkit.getOfflinePlayer(this.AS("&Shards:")));
+		Score clazz = obj.getScore(Bukkit.getOfflinePlayer(this.AS("&e" + WordUtils.capitalize(this.getClass(p)))));
+		
+		if (this.getClass(p).equals("roadrunner")){
+			
+			clazz = obj.getScore(Bukkit.getOfflinePlayer(this.AS("&eRR")));
+			
+		}
+		
+		Score shards = obj.getScore(Bukkit.getOfflinePlayer(this.AS("&6Shards:")));
 		Score mobKills = obj.getScore(Bukkit.getOfflinePlayer(this.AS("&6Mob Kills:")));
 		
 		obj.setDisplayName(this.AS("&d&lMob Mondays"));
 		round.setScore(this.pl.utils.getRound());
 		clazz.setScore(0);
 		shards.setScore(0);
-		mobKills.setScore(this.getMobKills());
+		mobKills.setScore(this.pl.utils.getMobKills());
 		
 	}
 	

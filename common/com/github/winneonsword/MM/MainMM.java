@@ -31,6 +31,8 @@ public class MainMM extends JavaPlugin {
 	public PluginManager pm;
 	public UtilsGameplay utils;
 	
+	public int repeat;
+	
 	public static YamlConfiguration config = new YamlConfiguration();
 	public static YamlConfiguration datacore = new YamlConfiguration();
 	public static YamlConfiguration help = new YamlConfiguration();
@@ -68,7 +70,7 @@ public class MainMM extends JavaPlugin {
 		this.registerCommands();
 		this.registerListeners();
 		
-		this.utils.repeat(this, new Runnable(){
+		this.repeat = this.utils.repeat(this, new Runnable(){
 			
 			public void run(){
 				
@@ -93,6 +95,7 @@ public class MainMM extends JavaPlugin {
 	public void onDisable(){
 		
 		UtilsMM.saveVariables();
+		this.getServer().getScheduler().cancelTask(repeat);
 		this.getLogger().log(Level.INFO, "Mob Mondays has been disabled.");
 		
 	}

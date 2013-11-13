@@ -41,7 +41,6 @@ public class EntityDeath extends UtilsGameplay implements Listener {
 				if (this.checkMobType(round, ent)){
 					
 					this.incrementKills(p);
-					this.s(p, "Killed: "+ this.pl.utils.totalKilled);
 					this.game.checkRoundChange(50, 2);
 					
 				}
@@ -53,7 +52,6 @@ public class EntityDeath extends UtilsGameplay implements Listener {
 				if (this.checkMobType(round, ent)){
 					
 					this.incrementKills(p);
-					this.s(p, "Killed: " + this.pl.utils.totalKilled);
 					this.game.checkRoundChange(70, 3);
 					
 				}
@@ -65,7 +63,6 @@ public class EntityDeath extends UtilsGameplay implements Listener {
 				if (this.checkMobType(round, ent)){
 					
 					this.incrementKills(p);
-					this.s(p, "Killed: " + this.pl.utils.totalKilled);
 					this.game.checkRoundChange(90, 4);
 					
 				}
@@ -77,7 +74,6 @@ public class EntityDeath extends UtilsGameplay implements Listener {
 				if (this.checkMobType(round, ent)){
 					
 					this.incrementKills(p);
-					this.s(p, "Killed: " + this.pl.utils.totalKilled);
 					this.game.checkRoundChange(120, 5);
 					
 				}

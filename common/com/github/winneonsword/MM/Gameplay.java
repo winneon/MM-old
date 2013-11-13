@@ -34,8 +34,8 @@ public class Gameplay extends UtilsGameplay implements Listener {
 			String pl = this.getPlayerList().get(i);
 			Player p = Bukkit.getPlayer(pl);
 			
-			this.setVariables(p);
-			this.giveGameItems();
+			this.pl.utils.setVariables(p);
+			this.pl.utils.giveGameItems();
 			
 		}
 		
@@ -54,9 +54,9 @@ public class Gameplay extends UtilsGameplay implements Listener {
 			Player p = Bukkit.getPlayer(pl);
 			final Player finalP = p;
 			
-			this.setVariables(p);
-			this.clearInven();
-			this.clearArmour();
+			this.pl.utils.setVariables(p);
+			this.pl.utils.clearInven();
+			this.pl.utils.clearArmour();
 			
 			this.setGameRule(world, "doDaylightCycle", true);
 			this.setTime(world, 0L);
@@ -195,7 +195,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 	
 	private void checkWelcome(){
 		
-		if (this.welcomeSlide >= (this.welcome.length - 1)){
+		if (this.welcomeSlide > (this.welcome.length - 1)){
 			
 			Bukkit.getServer().getScheduler().cancelTask(this.runWelcome);
 			this.beginRound(1);
