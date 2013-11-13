@@ -27,6 +27,7 @@ public class UtilsGameplay extends UtilsMM {
 	private String clazz;
 	private ClassData data = null;
 	
+	private boolean scoreboard;
 	private int round;
 	
 	public UtilsGameplay(MainMM pl){
@@ -129,13 +130,13 @@ public class UtilsGameplay extends UtilsMM {
 	
 	public boolean getScoreboard(){
 		
-		return UtilsMisc.scoreboard;
+		return this.scoreboard;
 		
 	}
 	
 	public void setScoreboard(boolean bool){
 		
-		UtilsMisc.scoreboard = bool;
+		this.scoreboard = bool;
 		
 		for (int i = 0; i < getPlayerList().size(); i++){
 			
@@ -279,7 +280,7 @@ public class UtilsGameplay extends UtilsMM {
 	
 	private void setVariables(){
 		
-		UtilsMisc.scoreboard = false;
+		this.scoreboard = false;
 		
 	}
 	

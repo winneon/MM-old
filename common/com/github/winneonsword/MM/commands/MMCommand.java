@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -333,6 +334,82 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 					} else {
 						
 						this.game.endGame();
+						
+					}
+					
+					break;
+					
+				case "add":
+					
+					if (args.length == 1 || args.length == 2){
+						
+						this.s(p, "&cCorrect Usage: /mm add <player> <class> - Adds a player to MM manually.");
+						
+					} else {
+						
+						try {
+							
+							this.getClassInfo(args[1]);
+							
+						} catch (InvalidClassException e){
+							
+							this.s(p, "That is not a valid class!");
+							
+							return true;
+							
+						}
+						
+						Player pl;
+						
+						try {
+							
+							pl = Bukkit.getPlayer(args[1]);
+							
+						} catch (NullPointerException e){
+							
+							this.s(p, "&cThat player is not online!");
+							
+							return true;
+							
+						}
+						
+						boolean add = this.addPlayer(pl, args[1]);
+						
+						if (add){
+							
+							this.s(p, "Added the player &7" + pl.getDisplayName() + " &dto MM as the class &6" + args[1] + "&d!");
+							
+						} else {
+							
+							this.s(p, "The player &7" + pl.getDisplayName() + " &dhas already joined MM!");
+							
+						}
+						
+					}
+					
+					break;
+					
+				case "remove":
+					
+					if (args.length == 1){
+						
+						this.s(p, "&cCorrect usage: /mm remove <player> - Removes a player from MM.");
+						
+					} else {
+						
+						OfflinePlayer pl = Bukkit.getOfflinePlayer(args[1]);
+						
+						boolean remove = this.removePlayer(pl);
+						
+						if (remove){
+							
+							this.s(p, "Removed the player &7" + pl.getName() + " &dfrom MM.");
+							
+						} else {
+							
+							this.s(p, "The player &7" + pl.getName() + " &dhas not joined MM!");
+							
+						}
 						
 					}
 					

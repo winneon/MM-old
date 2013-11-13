@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -135,6 +136,12 @@ public class UtilsMM {
 		
 	}
 	
+	public static String getClass(OfflinePlayer p){
+		
+		return pl.datacore.getString("Users." + p.getName() + ".class");
+		
+	}
+	
 	public static String[] getClassArray(){
 		
 		String[] c = {
@@ -206,6 +213,22 @@ public class UtilsMM {
 		
 	}
 	
+	public static boolean isInClass(OfflinePlayer p){
+		
+		String clazz = getClass(p);
+		
+		if (clazz == null){
+			
+			return false;
+			
+		} else {
+			
+			return true;
+			
+		}
+		
+	}
+	
 	public static boolean toggleJoin(){
 		
 		toggle = !(toggle);
@@ -240,6 +263,23 @@ public class UtilsMM {
 	}
 	
 	public static boolean removePlayer(Player p){
+		
+		if (!(isInClass(p))){
+			
+			return false;
+			
+		} else {
+			
+			playerList.remove(p.getName());
+			pl.datacore.set("Users." + p.getName() + ".class", null);
+			
+			return true;
+			
+		}
+		
+	}
+	
+	public static boolean removePlayer(OfflinePlayer p){
 		
 		if (!(isInClass(p))){
 			

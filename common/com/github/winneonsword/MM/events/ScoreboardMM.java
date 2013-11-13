@@ -28,10 +28,10 @@ public class ScoreboardMM extends UtilsGameplay implements Listener {
 	public void onScoreboard(ScoreboardUpdateEvent e){
 		
 		Player p = e.getPlayer();
-		Scoreboard board = p.getScoreboard();
 		
 		if (this.getScoreboard()){
 			
+			Scoreboard board = p.getScoreboard();
 			Objective mm = p.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
 			
 			this.pl.utils.setVariables(p);
