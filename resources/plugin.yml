@@ -8,7 +8,3 @@ commands:
     mm:
         description: The main help menu.
         usage: 'Usage: /mm ? - The main help menu.'
-permissions:
-    wa.staff:
-        description: WA Staff
-        default: op
