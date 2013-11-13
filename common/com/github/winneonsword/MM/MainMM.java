@@ -153,6 +153,27 @@ public class MainMM extends JavaPlugin {
 	
 	private void firstRun() throws Exception {
 		
+		if (!(configFile.exists())){
+			
+			configFile.getParentFile().mkdirs();
+			this.copy(this.getResource("config.yml"), configFile);
+			
+		}
+		
+		if (!(datacoreFile.exists())){
+			
+			datacoreFile.getParentFile().mkdirs();
+			this.copy(this.getResource("datacore.yml"), datacoreFile);
+			
+		}
+		
+		if (!(helpFile.exists())){
+			
+			helpFile.getParentFile().mkdirs();
+			this.copy(this.getResource("help.yml"), helpFile);
+			
+		}
+		
 		String[] yamls = {
 				
 				"config",
@@ -194,27 +215,6 @@ public class MainMM extends JavaPlugin {
 				break;
 			
 			}
-			
-		}
-		
-		if (!(configFile.exists())){
-			
-			configFile.getParentFile().mkdirs();
-			this.copy(this.getResource("config.yml"), configFile);
-			
-		}
-		
-		if (!(datacoreFile.exists())){
-			
-			datacoreFile.getParentFile().mkdirs();
-			this.copy(this.getResource("datacore.yml"), datacoreFile);
-			
-		}
-		
-		if (!(helpFile.exists())){
-			
-			helpFile.getParentFile().mkdirs();
-			this.copy(this.getResource("help.yml"), helpFile);
 			
 		}
 		
