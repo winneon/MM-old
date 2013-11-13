@@ -1,5 +1,6 @@
 package com.github.winneonsword.MM.events;
 
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -26,18 +27,20 @@ public class EntityDeath extends UtilsGameplay implements Listener {
 	public void onEntityDeath(EntityDeathEvent e){
 		
 		int random = this.randomize(3);
+		LivingEntity ent = e.getEntity();
 		
-		if (e.getEntity().getKiller() instanceof Player){
+		if (ent.getKiller() instanceof Player){
 			
-			Player p = e.getEntity().getKiller();
+			Player p = ent.getKiller();
+			int round = this.pl.utils.getRound();
 			
-			switch (this.pl.utils.getRound()){
+			switch (round){
 			
 			case 1:
 				
-				if (this.checkMobType(this.pl.utils.getRound(), e.getEntity())){
+				if (this.checkMobType(round, ent)){
 					
-					this.pl.utils.totalKilled++;
+					this.incrementKills(p);
 					this.s(p, "Killed: "+ this.pl.utils.totalKilled);
 					this.game.checkRoundChange(50, 2);
 					
@@ -47,9 +50,9 @@ public class EntityDeath extends UtilsGameplay implements Listener {
 				
 			case 2:
 				
-				if (this.checkMobType(this.pl.utils.getRound(), e.getEntity())){
+				if (this.checkMobType(round, ent)){
 					
-					this.pl.utils.totalKilled++;
+					this.incrementKills(p);
 					this.s(p, "Killed: " + this.pl.utils.totalKilled);
 					this.game.checkRoundChange(70, 3);
 					
@@ -59,11 +62,23 @@ public class EntityDeath extends UtilsGameplay implements Listener {
 				
 			case 3:
 				
-				if (this.checkMobType(this.pl.utils.getRound(), e.getEntity())){
+				if (this.checkMobType(round, ent)){
 					
-					this.pl.utils.totalKilled++;
+					this.incrementKills(p);
 					this.s(p, "Killed: " + this.pl.utils.totalKilled);
 					this.game.checkRoundChange(90, 4);
+					
+				}
+				
+				break;
+				
+			case 4:
+				
+				if (this.checkMobType(round, ent)){
+					
+					this.incrementKills(p);
+					this.s(p, "Killed: " + this.pl.utils.totalKilled);
+					this.game.checkRoundChange(120, 5);
 					
 				}
 				
@@ -84,6 +99,14 @@ public class EntityDeath extends UtilsGameplay implements Listener {
 			}
 			
 		}
+		
+	}
+	
+	private void incrementKills(Player p){
+		
+		this.pl.utils.setVariables(p);
+		this.pl.utils.incrementMobKills(1);
+		this.pl.utils.totalKilled++;
 		
 	}
 	

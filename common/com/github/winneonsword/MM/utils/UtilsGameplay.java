@@ -1,5 +1,6 @@
 package com.github.winneonsword.MM.utils;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -11,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import com.github.lyokofirelyte.WCAPI.Events.ScoreboardUpdateEvent;
 import com.github.winneonsword.MM.ClassData;
 import com.github.winneonsword.MM.MainMM;
 import com.github.winneonsword.MM.exceptions.InvalidClassException;
@@ -18,16 +20,21 @@ import com.github.winneonsword.MM.exceptions.InvalidClassException;
 public class UtilsGameplay extends UtilsMM {
 	
 	public int totalKilled;
+	public int mobKills;
 	
+	private Player p;
 	private PlayerInventory inven;
 	private String clazz;
 	private ClassData data = null;
 	
 	private int round;
+	private boolean scoreboard;
 	
 	public UtilsGameplay(MainMM pl){
 		
 		super(pl);
+		
+		this.setVariables();
 		
 	}
 	
@@ -47,7 +54,7 @@ public class UtilsGameplay extends UtilsMM {
 	
 	public int getTotalRounds(){
 		
-		return 3;
+		return 4;
 		
 	}
 	
@@ -99,6 +106,41 @@ public class UtilsGameplay extends UtilsMM {
 		
 	}
 	
+	public int getMobKills(){
+		
+		return this.mobKills;
+		
+	}
+	
+	public void incrementMobKills(int times){
+		
+		this.mobKills += times;
+		this.pl.datacore.set("Users." + this.p.getName() + ".mobKills", this.mobKills);
+		this.pl.saveYMLs();
+		
+	}
+	
+	public boolean getScoreboard(){
+		
+		return this.scoreboard;
+		
+	}
+	
+	public void setScoreboard(boolean bool){
+		
+		this.scoreboard = bool;
+		
+		for (int i = 0; i < getPlayerList().size(); i++){
+			
+			String pl = getPlayerList().get(i);
+			Player p = Bukkit.getPlayer(pl);
+			
+			Bukkit.getServer().getPluginManager().callEvent(new ScoreboardUpdateEvent(p));
+			
+		}
+		
+	}
+	
 	public void setTime(World world, long time){
 		
 		world.setTime(time);
@@ -143,13 +185,15 @@ public class UtilsGameplay extends UtilsMM {
 	
 	public boolean checkMobType(int round, LivingEntity e){
 		
-		if (e.getKiller() instanceof Player && e.getLocation().distance(this.getArena()) <= this.getArenaR()){
+		if (e.getLocation().distance(this.getArena()) <= this.getArenaR()){
+			
+			EntityType ent = e.getType();
 			
 			switch (round){
 			
 			case 1:
 				
-				if (e.getType() == EntityType.ZOMBIE){
+				if (ent == EntityType.ZOMBIE){
 					
 					return true;
 					
@@ -159,7 +203,7 @@ public class UtilsGameplay extends UtilsMM {
 				
 			case 2:
 				
-				if (e.getType() == EntityType.SKELETON){
+				if (ent == EntityType.SKELETON){
 					
 					return true;
 					
@@ -169,7 +213,17 @@ public class UtilsGameplay extends UtilsMM {
 				
 			case 3:
 				
-				if (e.getType() == EntityType.SPIDER){
+				if (ent == EntityType.SPIDER){
+					
+					return true;
+					
+				}
+				
+				break;
+				
+			case 4:
+				
+				if (ent == EntityType.ZOMBIE || ent == EntityType.SKELETON){
 					
 					return true;
 					
@@ -199,8 +253,10 @@ public class UtilsGameplay extends UtilsMM {
 	
 	public void setVariables(Player p){
 		
+		this.p = p;
 		this.inven = p.getInventory();
 		this.clazz = this.getClass(p);
+		this.mobKills = this.pl.datacore.getInt("Users." + p.getName() + ".mobKills");
 		
 		try {
 			
@@ -211,6 +267,12 @@ public class UtilsGameplay extends UtilsMM {
 			e.printStackTrace();
 			
 		}
+		
+	}
+	
+	private void setVariables(){
+		
+		this.scoreboard = false;
 		
 	}
 	

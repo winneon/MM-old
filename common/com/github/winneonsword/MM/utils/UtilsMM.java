@@ -121,6 +121,14 @@ public class UtilsMM {
 		
 	}
 	
+	public static int repeat(Plugin pl, Runnable runnable, long initialTicks, long ticks){
+		
+		int task = Bukkit.getScheduler().scheduleSyncRepeatingTask(pl, runnable, initialTicks, ticks);
+		
+		return task;
+		
+	}
+	
 	public static String getClass(Player p){
 		
 		return pl.datacore.getString("Users." + p.getName() + ".class");

@@ -9,12 +9,14 @@ import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.github.lyokofirelyte.WCAPI.WCAPI;
 import com.github.lyokofirelyte.WCAPI.WCManager;
+import com.github.lyokofirelyte.WCAPI.Events.ScoreboardUpdateEvent;
 import com.github.winneonsword.MM.commands.MMCommand;
 import com.github.winneonsword.MM.events.EntityDeath;
 import com.github.winneonsword.MM.events.MiscEvents;
@@ -64,6 +66,23 @@ public class MainMM extends JavaPlugin {
 		
 		this.registerCommands();
 		this.registerListeners();
+		
+		this.utils.repeat(this, new Runnable(){
+			
+			public void run(){
+				
+				for (int i = 0; i < utils.getPlayerList().size(); i++){
+					
+					String pl = utils.getPlayerList().get(i);
+					Player p = Bukkit.getPlayer(pl);
+					
+					Bukkit.getServer().getPluginManager().callEvent(new ScoreboardUpdateEvent(p));
+					
+				}
+				
+			}
+			
+		}, 100L, 100L);
 		
 		this.getLogger().log(Level.INFO, "Mob Mondays has been hooked and enabled alongside WCAPI!");
 		

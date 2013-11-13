@@ -41,6 +41,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 		
 		this.setGameRule(world, "doDaylightCycle", false);
 		this.setTime(world, 18000L);
+		this.setScoreboard(true);
 		this.welcomePlayers();
 		
 	}
@@ -62,6 +63,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 			
 			this.sMM("Mob Mondays has ended! Thank you for playing, warping you to spawn.");
 			this.clearMobs(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), this.getArenaR());
+			this.setScoreboard(false);
 			
 			this.delay(this.pl, new Runnable(){
 				
@@ -89,7 +91,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 		
 		default:
 			
-			this.sMM("An unknown round has started! Stopping MM.");
+			this.sMM("&cAn unknown round has started! Stopping MM.");
 			
 			this.delay(this.pl, new Runnable(){
 				
@@ -119,6 +121,13 @@ public class Gameplay extends UtilsGameplay implements Listener {
 			
 			this.sMM("Round 3 has begun!");
 			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.SPIDER, 90);
+			break;
+			
+		case 4:
+			
+			this.sMM("Round 4 has begun!");
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.ZOMBIE, 60);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.SKELETON, 60);
 			break;
 			
 		}
@@ -169,7 +178,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 		
 		this.welcomeSlide = 0;
 		
-		this.runWelcome = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this.pl, new Runnable(){
+		this.runWelcome = this.repeat(this.pl, new Runnable(){
 			
 			public void run(){
 				
