@@ -50,22 +50,73 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 					
 				case "?": case "help":
 					
-					String[] helpMenu = {
+					String[] categories = {
 							
 							this.WC + "Mob Mondays Help Panel",
 							"&5- &d/mm ? &5// &dThe main help panel.",
-							"&5- &d/mm join <class> &5// &dJoin an MM game.",
-							"&5- &d/mm leave &5// &dLeave an MM game.",
-							"&5- &d/mm list &5// &dView the player list.",
-							"&5- &d/mm class <class | list> &5// &dStats of a class or the class list.",
-							"&5- &d/mm start &5// &dStart an MM game. &5(&dSTAFF ONLY&5)",
-							"&5- &d/mm stop &5// &dStop an MM game. NO CONFIRM! &5(&dSTAFF ONLY&5)",
-							"&5- &d/mm toggle &5// &dToggle the open status of MM. &5(&dSTAFF ONLY&5)",
-							"&5- &d/mm disable &5// &dDisable Mob Mondays. &5(&dSTAFF ONLY&5)"
+							"&5- &d/mm ? general &5// &dThe general MM commands.",
+							"&5- &d/mm ? staff &5// &dThe staff MM commands."
 							
 					};
 					
-					this.s(p, helpMenu);
+					if (args.length == 1){
+						
+						this.s(p, categories);
+						
+					} else {
+						
+						switch (args[1].toLowerCase()){
+						
+						case "general":
+							
+							String[] general = {
+									
+									this.WC + "Mob Mondays General Commands",
+									"&5- &d/mm ? &5// &dThe main help panel.",
+									"&5- &d/mm join <class> &5// &dJoin an MM game.",
+									"&5- &d/mm leave &5// &dLeave an MM game.",
+									"&5- &d/mm list &5// &dView the player list.",
+									"&5- &d/mm class <class | list> &5// &dStats of a class or the class list.",
+									"&5- &d/mm start &5// &dStart an MM game. &5(&dSTAFF ONLY&5)",
+									"&5- &d/mm stop &5// &dStop an MM game. NO CONFIRM! &5(&dSTAFF ONLY&5)",
+									"&5- &d/mm toggle &5// &dToggle the open status of MM. &5(&dSTAFF ONLY&5)",
+									"&5- &d/mm disable &5// &dDisable Mob Mondays. &5(&dSTAFF ONLY&5)"
+									
+							};
+							
+							this.s(p, general);
+							break;
+							
+						case "staff":
+							
+							if (!(p.hasPermission("wa.staff"))){
+								
+								this.s(p, "&cDoes it look like you have permission to use this?");
+								
+							}
+							
+							String[] staff = {
+									
+									this.WC + "Mob Mondays Staff Commands",
+									"&5- &d/mm start &5// &dStart an MM game.",
+									"&5- &d/mm stop &5// &dStop an MM game. THERE IS NO CONFIRM!",
+									"&5- &d/mm toggle &5// &dToggle the open status of MM.",
+									"&5- &d/mm disable &5// &dDisable Mob Mondays."
+									
+							};
+							
+							this.s(p, staff);							
+							break;
+							
+						default:
+							
+							this.s(p, categories);
+							break;
+							
+						}
+						
+					}
+					
 					break;
 					
 				case "toggle":
@@ -116,7 +167,7 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 						
 						try {
 							
-							this.getClassInfo(args[1]);
+							this.getClassInfo(args[1].toLowerCase());
 							
 						} catch (InvalidClassException e){
 							
