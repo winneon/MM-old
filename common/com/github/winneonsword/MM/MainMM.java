@@ -17,6 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.github.lyokofirelyte.WCAPI.WCAPI;
 import com.github.lyokofirelyte.WCAPI.WCManager;
 import com.github.lyokofirelyte.WCAPI.Events.ScoreboardUpdateEvent;
+import com.github.lyokofirelyte.WCAPI.Manager.InventoryManager;
 import com.github.winneonsword.MM.commands.MMCommand;
 import com.github.winneonsword.MM.events.EntityDeath;
 import com.github.winneonsword.MM.events.MiscEvents;
@@ -29,6 +30,7 @@ public class MainMM extends JavaPlugin {
 	public WCAPI api;
 	public WCManager wcm;
 	public PluginManager pm;
+	public InventoryManager invManager;
 	public UtilsGameplay utils;
 	
 	public int repeat;
@@ -51,6 +53,7 @@ public class MainMM extends JavaPlugin {
 		this.api = (WCAPI) WCAPI;
 		this.wcm = new WCManager(api);
 		this.pm = this.getServer().getPluginManager();
+		this.invManager = new InventoryManager(api);
 		this.utils = new UtilsGameplay(this);
 		
 		try {

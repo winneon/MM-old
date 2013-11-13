@@ -252,7 +252,7 @@ public class UtilsGameplay extends UtilsMM {
 	
 	public ItemStack getShard(){
 		
-		ItemStack shard = this.pl.api.invManager.makeItem(UtilsMM.AS("&d&lElemental Shard"), UtilsMM.AS("&6Right click me!"), true, Enchantment.DURABILITY, 10, 0, Material.QUARTZ, 1);
+		ItemStack shard = this.pl.invManager.makeItem(UtilsMM.AS("&d&lElemental Shard"), UtilsMM.AS("&6Right click me!"), true, Enchantment.DURABILITY, 10, 0, Material.QUARTZ, 1);
 		
 		return shard;
 		

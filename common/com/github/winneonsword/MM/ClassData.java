@@ -47,8 +47,8 @@ public class ClassData {
 			
 			ArrayUtils.reverse(armour);
 			
-			this.alpha = UtilsMM.pl.api.invManager.makeItem(UtilsMM.AS("&2&lAlpha Ability"), UtilsMM.AS("&6Right click me!"), false, Enchantment.DURABILITY, 10, 0, Material.GREEN_RECORD, 1);
-			this.omega = UtilsMM.pl.api.invManager.makeItem(UtilsMM.AS("&6&lOmega Ability"), UtilsMM.AS("&6Right click me!"), false, Enchantment.DURABILITY, 10, 0, Material.GOLD_RECORD, 1);
+			this.alpha = UtilsMM.pl.invManager.makeItem(UtilsMM.AS("&2&lAlpha Ability"), UtilsMM.AS("&6Right click me!"), false, Enchantment.DURABILITY, 10, 0, Material.GREEN_RECORD, 1);
+			this.omega = UtilsMM.pl.invManager.makeItem(UtilsMM.AS("&6&lOmega Ability"), UtilsMM.AS("&6Right click me!"), false, Enchantment.DURABILITY, 10, 0, Material.GOLD_RECORD, 1);
 			
 		} else {
 			
