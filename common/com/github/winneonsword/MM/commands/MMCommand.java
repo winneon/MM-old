@@ -77,10 +77,6 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 									"&5- &d/mm leave &5// &dLeave an MM game.",
 									"&5- &d/mm list &5// &dView the player list.",
 									"&5- &d/mm class <class | list> &5// &dStats of a class or the class list.",
-									"&5- &d/mm start &5// &dStart an MM game. &5(&dSTAFF ONLY&5)",
-									"&5- &d/mm stop &5// &dStop an MM game. NO CONFIRM! &5(&dSTAFF ONLY&5)",
-									"&5- &d/mm toggle &5// &dToggle the open status of MM. &5(&dSTAFF ONLY&5)",
-									"&5- &d/mm disable &5// &dDisable Mob Mondays. &5(&dSTAFF ONLY&5)"
 									
 							};
 							
@@ -101,6 +97,8 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 									"&5- &d/mm start &5// &dStart an MM game.",
 									"&5- &d/mm stop &5// &dStop an MM game. THERE IS NO CONFIRM!",
 									"&5- &d/mm toggle &5// &dToggle the open status of MM.",
+									"&5- &d/mm add <player> <class> &5// &dAdd a player from MM. DEBUG ONLY.",
+									"&5- &d/mm remove <player> &5// &dRemove a player from MM. DEBUG ONLY.",
 									"&5- &d/mm disable &5// &dDisable Mob Mondays."
 									
 							};
@@ -404,7 +402,7 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 							
 						} catch (InvalidClassException e){
 							
-							this.s(p, "That is not a valid class!");
+							this.s(p, "&cThat is not a valid class!");
 							
 							return true;
 							

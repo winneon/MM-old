@@ -24,12 +24,12 @@ public class ScoreboardMM extends UtilsGameplay implements Listener {
 		
 	}
 	
-	@EventHandler(priority = EventPriority.LOWEST)
+	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onScoreboard(ScoreboardUpdateEvent e){
 		
 		Player p = e.getPlayer();
 		
-		if (this.getScoreboard()){
+		if (this.pl.utils.getScoreboard()){
 			
 			Scoreboard board = p.getScoreboard();
 			Objective mm = p.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
@@ -61,14 +61,7 @@ public class ScoreboardMM extends UtilsGameplay implements Listener {
 	private void setScores(Objective obj, Player p){
 		
 		Score round = obj.getScore(Bukkit.getOfflinePlayer(this.AS("&6Round:")));
-		Score clazz = obj.getScore(Bukkit.getOfflinePlayer(this.AS("&e" + WordUtils.capitalize(this.getClass(p)))));
-		
-		if (this.getClass(p).equals("roadrunner")){
-			
-			clazz = obj.getScore(Bukkit.getOfflinePlayer(this.AS("&eRR")));
-			
-		}
-		
+		Score clazz = obj.getScore(Bukkit.getOfflinePlayer(this.AS("&e" + WordUtils.capitalize(this.getClass(p)))));		
 		Score shards = obj.getScore(Bukkit.getOfflinePlayer(this.AS("&6Shards:")));
 		Score mobKills = obj.getScore(Bukkit.getOfflinePlayer(this.AS("&6Mob Kills:")));
 		

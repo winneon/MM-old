@@ -41,7 +41,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 		
 		this.setGameRule(world, "doDaylightCycle", false);
 		this.setTime(world, 18000L);
-		this.setScoreboard(true);
+		this.pl.utils.setScoreboard(true);
 		this.welcomePlayers();
 		
 	}
@@ -63,7 +63,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 			
 			this.sMM("Mob Mondays has ended! Thank you for playing, warping you to spawn.");
 			this.clearMobs(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), this.getArenaR());
-			this.setScoreboard(false);
+			this.pl.utils.setScoreboard(false);
 			
 			this.delay(this.pl, new Runnable(){
 				
@@ -86,6 +86,17 @@ public class Gameplay extends UtilsGameplay implements Listener {
 		this.pl.utils.totalKilled = 0;
 		
 		this.clearMobs(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), this.getArenaR());
+		
+		for (int i = 0; i < this.getPlayerList().size(); i++){
+			
+			String pl  = this.getPlayerList().get(i);
+			Player p = Bukkit.getPlayer(pl);
+			
+			p.setHealth(20.0);
+			p.setFoodLevel(20);
+			p.setSaturation(1000);
+			
+		}
 		
 		switch (round){
 		
@@ -163,7 +174,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 				"Please read carefully for the rules!",
 				"No leaving the arena via any command except /mm leave!",
 				"If you find a glitch, please report it to &7Winneon&d!",
-				"Do &c&lNOT &dask for heals or feeds! These get distributed automatically every round!",
+				"Do &c&lNOT&d ask for heals or feeds! These get distributed automatically every round!",
 				"All MM related commands are located under /mm ? or /mm help!",
 				"The player list is located under /mm list!",
 				"To view your stats such as shards, mob kills, etc, type /mm stats or look at the sidebar!",
@@ -171,7 +182,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 				"To use your omega ability, right click the gold music disc!",
 				"Remember, abilities use shards as a cost! The prices are listed /mm class <class>!",
 				"To deposit the shards, you collect, just right click them!",
-				"&c&lWARNING: &cMM will be difficult. Work together with your teammates to stay alive.",
+				"&c&lWARNING:&c MM will be difficult. Work together with your teammates to stay alive.",
 				"Alright! Here we go! I'll make it easy for you the first round."
 				
 		});
@@ -182,10 +193,14 @@ public class Gameplay extends UtilsGameplay implements Listener {
 			
 			public void run(){
 				
-				checkWelcome();
+				boolean check = checkWelcome();
 				
-				UtilsMM.sMM(welcome[welcomeSlide]);
-				welcomeSlide++;
+				if (!(check)){
+					
+					UtilsMM.sMM(welcome[welcomeSlide]);
+					welcomeSlide++;
+					
+				}
 				
 			}
 			
@@ -193,12 +208,18 @@ public class Gameplay extends UtilsGameplay implements Listener {
 		
 	}
 	
-	private void checkWelcome(){
+	private boolean checkWelcome(){
 		
 		if (this.welcomeSlide > (this.welcome.length - 1)){
 			
 			Bukkit.getServer().getScheduler().cancelTask(this.runWelcome);
 			this.beginRound(1);
+			
+			return true;
+			
+		} else {
+			
+			return false;
 			
 		}
 		

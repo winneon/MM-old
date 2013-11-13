@@ -54,7 +54,6 @@ public class MainMM extends JavaPlugin {
 		this.wcm = new WCManager(api);
 		this.pm = this.getServer().getPluginManager();
 		this.invManager = new InventoryManager(api);
-		this.utils = new UtilsGameplay(this);
 		
 		try {
 			
@@ -69,6 +68,8 @@ public class MainMM extends JavaPlugin {
 		}
 		
 		this.loadYMLs();
+		
+		this.utils = new UtilsGameplay(this);
 		
 		this.registerCommands();
 		this.registerListeners();

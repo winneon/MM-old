@@ -271,7 +271,7 @@ public class UtilsMM {
 		} else {
 			
 			playerList.remove(p.getName());
-			pl.datacore.set("Users." + p.getName() + ".class", null);
+			pl.datacore.set("Users." + p.getName(), null);
 			
 			return true;
 			
@@ -430,7 +430,6 @@ public class UtilsMM {
 			this.arenaR = 0;
 			
 			Bukkit.getLogger().log(Level.SEVERE, "Failed to set the arena location! Set the arena with /mm set ASAP!");
-			e.printStackTrace();
 			
 		}
 		
