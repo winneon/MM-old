@@ -73,7 +73,7 @@ public class ClassAbility extends UtilsMM{
 					
 				}
 				
-			}, 100);
+			}, 1200);
 			
 			break;
 			
@@ -122,6 +122,8 @@ public class ClassAbility extends UtilsMM{
 		
 		switch (name){
 		
+		final Player finalP = p;
+		
 		case "medic":
 			
 			this.s(p, "You have given everyone &6Regeneration III &dfor one minute!");
@@ -153,7 +155,7 @@ public class ClassAbility extends UtilsMM{
 				
 				String pl = this.getPlayerList().get(i);
 				Player player = Bukkit.getPlayer(pl);
-				final Player finalP = player;
+				finalP = player;
 				
 				player.setAllowFlight(true);
 				
@@ -173,7 +175,7 @@ public class ClassAbility extends UtilsMM{
 						
 					}
 					
-				}, 100);
+				}, 1200);
 				
 			}
 			
@@ -183,7 +185,7 @@ public class ClassAbility extends UtilsMM{
 			
 			PlayerInventory inven = p.getInventory();
 			
-			this.s(p, "You have been given a &6Warrior Axe &dthat knockbacks all mobs around you on click. (3 time use.)!");
+			this.s(p, "You have been given a &6Warrior Axe &dthat knockbacks all mobs around you on click! (3 time use.)");
 			this.s(p, "&c8 shards have been withdrawn.");
 			inven.addItem(this.pl.utils.getWarriorAxe());
 			p.updateInventory();
