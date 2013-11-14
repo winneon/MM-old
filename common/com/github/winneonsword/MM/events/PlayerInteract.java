@@ -24,7 +24,6 @@ import com.github.winneonsword.MM.MainMM;
 import com.github.winneonsword.MM.exceptions.InvalidClassException;
 import com.github.winneonsword.MM.utils.UtilsMM;
 
-@SuppressWarnings("deprecation")
 public class PlayerInteract extends UtilsMM implements Listener {
 	
 	public PlayerInteract(MainMM pl){
@@ -194,7 +193,6 @@ public class PlayerInteract extends UtilsMM implements Listener {
 					this.pl.utils.setKnockbackCounter(0);
 					this.s(p, "Your &6Warrior Axe &dhas run out of uses!");
 					inven.setItemInHand(new ItemStack(Material.AIR, 1));
-					p.updateInventory();
 					
 				}
 				
