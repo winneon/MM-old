@@ -28,7 +28,11 @@ public class ClassAbility extends UtilsMM{
 			this.name = name;
 			this.p = p;
 			
-		}		
+		} else {
+			
+			throw new InvalidClassException(name);
+			
+		}
 		
 	}
 	
