@@ -161,7 +161,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 		
 		if (mobs == this.pl.utils.getTotalKilled()){
 			
-			UtilsMM.sMM("Round " + (nextRound - 1) + " has completed! Round " + nextRound + " will begin in 3 seconds.");
+			this.sMM("Round " + (nextRound - 1) + " has completed! Round " + nextRound + " will begin in 3 seconds.");
 			this.clearMobs(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), this.getArenaR());
 			
 			this.delay(this.pl, new Runnable(){
