@@ -120,9 +120,9 @@ public class ClassAbility extends UtilsMM{
 	
 	private boolean omegaAbility(Player p, String name){
 		
-		switch (name){
-		
 		final Player finalP = p;
+		
+		switch (name){
 		
 		case "medic":
 			
