@@ -9,9 +9,9 @@ import org.bukkit.event.entity.EntityDeathEvent;
 
 import com.github.winneonsword.MM.Gameplay;
 import com.github.winneonsword.MM.MainMM;
-import com.github.winneonsword.MM.utils.UtilsGameplay;
+import com.github.winneonsword.MM.utils.UtilsMM;
 
-public class EntityDeath extends UtilsGameplay implements Listener {
+public class EntityDeath extends UtilsMM implements Listener {
 	
 	private Gameplay game;
 	
@@ -38,7 +38,7 @@ public class EntityDeath extends UtilsGameplay implements Listener {
 			
 			case 1:
 				
-				if (this.checkMobType(round, ent)){
+				if (this.pl.utils.checkMobType(round, ent)){
 					
 					this.incrementKills(p);
 					this.game.checkRoundChange(50, 2);
@@ -49,7 +49,7 @@ public class EntityDeath extends UtilsGameplay implements Listener {
 				
 			case 2:
 				
-				if (this.checkMobType(round, ent)){
+				if (this.pl.utils.checkMobType(round, ent)){
 					
 					this.incrementKills(p);
 					this.game.checkRoundChange(70, 3);
@@ -60,7 +60,7 @@ public class EntityDeath extends UtilsGameplay implements Listener {
 				
 			case 3:
 				
-				if (this.checkMobType(round, ent)){
+				if (this.pl.utils.checkMobType(round, ent)){
 					
 					this.incrementKills(p);
 					this.game.checkRoundChange(90, 4);
@@ -71,7 +71,7 @@ public class EntityDeath extends UtilsGameplay implements Listener {
 				
 			case 4:
 				
-				if (this.checkMobType(round, ent)){
+				if (this.pl.utils.checkMobType(round, ent)){
 					
 					this.incrementKills(p);
 					this.game.checkRoundChange(120, 5);
@@ -88,7 +88,7 @@ public class EntityDeath extends UtilsGameplay implements Listener {
 				
 				if (random == 3){
 					
-					e.getDrops().add(this.getShard());
+					e.getDrops().add(this.pl.utils.getShardItem());
 					
 				}
 				
@@ -102,7 +102,7 @@ public class EntityDeath extends UtilsGameplay implements Listener {
 		
 		this.pl.utils.setVariables(p);
 		this.pl.utils.incrementMobKills(1);
-		this.pl.utils.totalKilled++;
+		this.pl.utils.incrementTotalKilled(1);
 		
 	}
 	

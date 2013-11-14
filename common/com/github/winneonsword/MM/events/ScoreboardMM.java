@@ -14,9 +14,9 @@ import org.bukkit.scoreboard.ScoreboardManager;
 
 import com.github.lyokofirelyte.WCAPI.Events.ScoreboardUpdateEvent;
 import com.github.winneonsword.MM.MainMM;
-import com.github.winneonsword.MM.utils.UtilsGameplay;
+import com.github.winneonsword.MM.utils.UtilsMM;
 
-public class ScoreboardMM extends UtilsGameplay implements Listener {
+public class ScoreboardMM extends UtilsMM implements Listener {
 	
 	public ScoreboardMM(MainMM pl){
 		
@@ -28,13 +28,10 @@ public class ScoreboardMM extends UtilsGameplay implements Listener {
 	public void onScoreboard(ScoreboardUpdateEvent e){
 		
 		Player p = e.getPlayer();
+		Scoreboard board = p.getScoreboard();
+		Objective mm = p.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
 		
 		if (this.pl.utils.getScoreboard()){
-			
-			Scoreboard board = p.getScoreboard();
-			Objective mm = p.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
-			
-			this.pl.utils.setVariables(p);
 			
 			if (mm == null){
 				
@@ -43,16 +40,24 @@ public class ScoreboardMM extends UtilsGameplay implements Listener {
 				mm = board.registerNewObjective("mm", "dummy");
 				
 				mm.setDisplaySlot(DisplaySlot.SIDEBAR);
-				this.pl.utils.setMobKills(0);
 				
 			}
 			
+			this.pl.utils.setVariables(p);
 			this.setScores(mm, p);
 			p.setScoreboard(board);
 			
 		} else {
 			
-			p.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+			if (mm != null){
+				
+				if (mm.getDisplayName().startsWith(this.AS("&e&l"))){
+					
+					p.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+					
+				}
+				
+			}
 			
 		}
 		
@@ -61,14 +66,12 @@ public class ScoreboardMM extends UtilsGameplay implements Listener {
 	private void setScores(Objective obj, Player p){
 		
 		Score round = obj.getScore(Bukkit.getOfflinePlayer(this.AS("&6Round:")));
-		Score clazz = obj.getScore(Bukkit.getOfflinePlayer(this.AS("&e" + WordUtils.capitalize(this.getClass(p)))));		
 		Score shards = obj.getScore(Bukkit.getOfflinePlayer(this.AS("&6Shards:")));
 		Score mobKills = obj.getScore(Bukkit.getOfflinePlayer(this.AS("&6Mob Kills:")));
 		
-		obj.setDisplayName(this.AS("&d&lMob Mondays"));
+		obj.setDisplayName(this.AS("&e&l" + WordUtils.capitalize(this.getClass(p))));
 		round.setScore(this.pl.utils.getRound());
-		clazz.setScore(0);
-		shards.setScore(0);
+		shards.setScore(this.pl.utils.getShards());
 		mobKills.setScore(this.pl.utils.getMobKills());
 		
 	}

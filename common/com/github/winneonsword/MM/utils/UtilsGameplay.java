@@ -19,9 +19,6 @@ import com.github.winneonsword.MM.exceptions.InvalidClassException;
 
 public class UtilsGameplay extends UtilsMM {
 	
-	public int totalKilled;
-	public int mobKills;
-	
 	private Player p;
 	private PlayerInventory inven;
 	private String clazz;
@@ -29,6 +26,10 @@ public class UtilsGameplay extends UtilsMM {
 	
 	private boolean scoreboard;
 	private int round;
+	
+	private int totalKilled;
+	private int mobKills;
+	private int shards;
 	
 	public UtilsGameplay(MainMM pl){
 		
@@ -124,6 +125,46 @@ public class UtilsGameplay extends UtilsMM {
 		
 		this.mobKills += times;
 		this.pl.datacore.set("Users." + this.p.getName() + ".mobKills", this.mobKills);
+		this.pl.saveYMLs();
+		
+	}
+	
+	public int getTotalKilled(){
+		
+		return this.totalKilled;
+		
+	}
+	
+	public void setTotalKilled(int killed){
+		
+		this.totalKilled = killed;
+		
+	}
+	
+	public void incrementTotalKilled(int times){
+		
+		this.totalKilled += times;
+		
+	}
+	
+	public int getShards(){
+		
+		return this.shards;
+		
+	}
+	
+	public void setShards(int shards){
+		
+		this.shards = shards;
+		this.pl.datacore.set("Users." + this.p.getName() + ".shards", this.shards);
+		this.pl.saveYMLs();
+		
+	}
+	
+	public void incrementShards(int times){
+		
+		this.shards += times;
+		this.pl.datacore.set("Users." + this.p.getName() + ".shards", this.shards);
 		this.pl.saveYMLs();
 		
 	}
@@ -251,7 +292,7 @@ public class UtilsGameplay extends UtilsMM {
 		
 	}
 	
-	public ItemStack getShard(){
+	public ItemStack getShardItem(){
 		
 		ItemStack shard = this.pl.invManager.makeItem(UtilsMM.AS("&d&lElemental Shard"), UtilsMM.AS("&6Right click me!"), true, Enchantment.DURABILITY, 10, 0, Material.QUARTZ, 1);
 		
@@ -265,6 +306,7 @@ public class UtilsGameplay extends UtilsMM {
 		this.inven = p.getInventory();
 		this.clazz = this.getClass(p);
 		this.mobKills = this.pl.datacore.getInt("Users." + p.getName() + ".mobKills");
+		this.shards = this.pl.datacore.getInt("Users." + p.getName() + ".shards");
 		
 		try {
 			

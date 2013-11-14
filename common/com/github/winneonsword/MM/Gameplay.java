@@ -6,6 +6,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
+import com.github.lyokofirelyte.WCAPI.Events.ScoreboardUpdateEvent;
 import com.github.winneonsword.MM.utils.UtilsGameplay;
 import com.github.winneonsword.MM.utils.UtilsMM;
 
@@ -41,6 +42,8 @@ public class Gameplay extends UtilsGameplay implements Listener {
 		
 		this.setGameRule(world, "doDaylightCycle", false);
 		this.setTime(world, 18000L);
+		this.pl.utils.setMobKills(0);
+		this.pl.utils.setShards(0);
 		this.pl.utils.setScoreboard(true);
 		this.welcomePlayers();
 		
@@ -83,7 +86,16 @@ public class Gameplay extends UtilsGameplay implements Listener {
 	public void beginRound(int round){
 		
 		this.pl.utils.setRound(round);
-		this.pl.utils.totalKilled = 0;
+		this.pl.utils.setTotalKilled(0);
+		
+		for (int i = 0; i < this.getPlayerList().size(); i++){
+			
+			String pl = this.getPlayerList().get(i);
+			Player p = Bukkit.getPlayer(pl);
+			
+			Bukkit.getServer().getPluginManager().callEvent(new ScoreboardUpdateEvent(p));
+			
+		}
 		
 		this.clearMobs(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), this.getArenaR());
 		
@@ -147,7 +159,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 	
 	public void checkRoundChange(int mobs, final int nextRound){
 		
-		if (mobs == this.pl.utils.totalKilled){
+		if (mobs == this.pl.utils.getTotalKilled()){
 			
 			UtilsMM.sMM("Round " + (nextRound - 1) + " has completed! Round " + nextRound + " will begin in 3 seconds.");
 			this.clearMobs(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), this.getArenaR());
@@ -177,7 +189,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 				"Do &c&lNOT&d ask for heals or feeds! These get distributed automatically every round!",
 				"All MM related commands are located under /mm ? or /mm help!",
 				"The player list is located under /mm list!",
-				"To view your stats such as shards, mob kills, etc, type /mm stats or look at the sidebar!",
+				"To view your stats such as shards, mob kills, etc, look at the sidebar to the right!",
 				"To use your alpha ability, right click the green music disc!",
 				"To use your omega ability, right click the gold music disc!",
 				"Remember, abilities use shards as a cost! The prices are listed /mm class <class>!",
