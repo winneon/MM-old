@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
 import com.github.winneonsword.MM.Gameplay;
@@ -24,7 +25,7 @@ public class EntityDeath extends UtilsMM implements Listener {
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL)
-	public void onEntityDeath(EntityDeathEvent e){
+	public void onMobKill(EntityDeathEvent e){
 		
 		int random = this.randomize(3);
 		LivingEntity ent = e.getEntity();
@@ -91,6 +92,25 @@ public class EntityDeath extends UtilsMM implements Listener {
 					e.getDrops().add(this.pl.utils.getShardItem());
 					
 				}
+				
+			}
+			
+		}
+		
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void onOneHitKO(EntityDamageByEntityEvent e){
+		
+		if (e.getDamager() instanceof Player){
+			
+			Player p = (Player) e.getDamager();
+			
+			this.pl.utils.setVariables(p);
+			
+			if (this.pl.utils.getOneHitKO()){
+				
+				e.setDamage(1000.0);
 				
 			}
 			

@@ -31,6 +31,9 @@ public class UtilsGameplay extends UtilsMM {
 	private int mobKills;
 	private int shards;
 	
+	private boolean oneHitKO;
+	private int knockback;
+	
 	public UtilsGameplay(MainMM pl){
 		
 		super(pl);
@@ -204,6 +207,42 @@ public class UtilsGameplay extends UtilsMM {
 		
 	}
 	
+	public boolean getOneHitKO(){
+		
+		return this.oneHitKO;
+		
+	}
+	
+	public void setOneHitKO(boolean bool){
+		
+		this.oneHitKO = bool;
+		this.pl.datacore.set("Users." + p.getName() + ".oneHitKO", bool);
+		this.pl.saveYMLs();
+		
+	}
+	
+	public int getKnockbackCounter(){
+		
+		return this.knockback;
+		
+	}
+	
+	public void setKnockbackCounter(int counter){
+		
+		this.knockback = counter;
+		this.pl.datacore.set("Users." + p.getName() + ".knockback", this.knockback);
+		this.pl.saveYMLs();
+		
+	}
+	
+	public void incrementKnockbackCounter(int times){
+		
+		this.knockback += times;
+		this.pl.datacore.set("Users." + p.getName() + ".knockback", this.knockback);
+		this.pl.saveYMLs();
+		
+	}
+	
 	public void spawnMob(World world, int x, int y, int z, EntityType entity, int times){
 		
 		for (int i = 0; i < times; i++){
@@ -300,6 +339,14 @@ public class UtilsGameplay extends UtilsMM {
 		
 	}
 	
+	public ItemStack getWarriorAxe(){
+		
+		ItemStack axe = this.pl.invManager.makeItem(this.AS("&e&lWarrior Axe"), this.AS("&6Use this to knockback mobs!"), true, Enchantment.DURABILITY, 10, 0, Material.DIAMOND_AXE, 1);
+		
+		return axe;
+		
+	}
+	
 	public void setVariables(Player p){
 		
 		this.p = p;
@@ -307,6 +354,8 @@ public class UtilsGameplay extends UtilsMM {
 		this.clazz = this.getClass(p);
 		this.mobKills = this.pl.datacore.getInt("Users." + p.getName() + ".mobKills");
 		this.shards = this.pl.datacore.getInt("Users." + p.getName() + ".shards");
+		this.oneHitKO = this.pl.datacore.getBoolean("Users." + p.getName() + ".oneHitKO");
+		this.knockback = this.pl.datacore.getInt("Users." + p.getName() + ".knockback");
 		
 		try {
 			

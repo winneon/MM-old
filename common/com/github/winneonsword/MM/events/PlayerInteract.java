@@ -3,7 +3,10 @@ package com.github.winneonsword.MM.events;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -13,6 +16,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.Vector;
 
 import com.github.lyokofirelyte.WCAPI.Events.ScoreboardUpdateEvent;
 import com.github.winneonsword.MM.ClassAbility;
@@ -20,6 +24,7 @@ import com.github.winneonsword.MM.MainMM;
 import com.github.winneonsword.MM.exceptions.InvalidClassException;
 import com.github.winneonsword.MM.utils.UtilsMM;
 
+@SuppressWarnings("deprecation")
 public class PlayerInteract extends UtilsMM implements Listener {
 	
 	public PlayerInteract(MainMM pl){
@@ -107,6 +112,7 @@ public class PlayerInteract extends UtilsMM implements Listener {
 					}
 					
 					this.pl.utils.setShards(this.pl.utils.getShards() - 5);
+					Bukkit.getServer().getPluginManager().callEvent(new ScoreboardUpdateEvent(p));
 					ability.getAlphaAbility();
 					
 				}
@@ -136,6 +142,7 @@ public class PlayerInteract extends UtilsMM implements Listener {
 					}
 					
 					this.pl.utils.setShards(this.pl.utils.getShards() - 8);
+					Bukkit.getServer().getPluginManager().callEvent(new ScoreboardUpdateEvent(p));
 					ability.getOmegaAbility();
 					
 				}
@@ -143,6 +150,70 @@ public class PlayerInteract extends UtilsMM implements Listener {
 			}
 			
 		}
+		
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void onEntityKnockback(PlayerInteractEvent e){
+		
+		Action act = e.getAction();
+		
+		if (act == Action.LEFT_CLICK_AIR || act == Action.LEFT_CLICK_BLOCK){
+			
+			Player p = e.getPlayer();
+			World world = p.getWorld();
+			PlayerInventory inven = p.getInventory();
+			ItemStack item = inven.getItemInHand();
+			ItemMeta meta = item.getItemMeta();
+			String display = meta.getDisplayName();
+			String lore = meta.getLore().get(0);
+			
+			if (display.equals(this.AS("&e&lWarrior Axe")) && lore.equals(this.AS("&6Use this to knockback mobs!")) && this.pl.utils.getRound() <= this.pl.utils.getTotalRounds()){
+				
+				this.pl.utils.setVariables(p);
+				
+				for (Entity ent : world.getEntities()){
+					
+					if (ent.getLocation().distance(p.getLocation()) <= 10 && !(ent instanceof Player)){
+						
+						this.knockbackEntity(p, ent, 2);
+						
+					}
+					
+				}
+				
+				int knockback = this.pl.utils.getKnockbackCounter();
+				
+				if (knockback < 2){
+					
+					this.pl.utils.incrementKnockbackCounter(1);
+					this.s(p, "You have &6" + (3 - this.pl.utils.getKnockbackCounter()) + " &duses left on your &6Warrior Axe&d!");
+					
+				} else {
+					
+					this.pl.utils.setKnockbackCounter(0);
+					this.s(p, "Your &6Warrior Axe &dhas run out of uses!");
+					inven.setItemInHand(new ItemStack(Material.AIR, 1));
+					p.updateInventory();
+					
+				}
+				
+				
+			}
+			
+		}
+		
+	}
+	
+	private void knockbackEntity(Player p, Entity e, double speed){
+		
+		Location loc = e.getLocation();	
+		
+		loc.setY(loc.getY() + 1);
+		
+		Vector vect = loc.toVector().subtract(p.getLocation().toVector()).normalize();
+		
+		e.setVelocity(vect.multiply(speed));
 		
 	}
 	

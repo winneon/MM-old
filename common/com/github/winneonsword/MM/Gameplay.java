@@ -183,7 +183,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 		this.welcome = UtilsMM.AS(new String[] {
 				
 				"Welcome to Mob Mondays!",
-				"Please read carefully for the rules!",
+				"&c&lPlease&c read carefully for the rules!",
 				"No leaving the arena via any command except /mm leave!",
 				"If you find a glitch, please report it to &7Winneon&d!",
 				"Do &c&lNOT&d ask for heals or feeds! These get distributed automatically every round!",
