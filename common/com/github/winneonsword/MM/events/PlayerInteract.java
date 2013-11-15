@@ -1,13 +1,18 @@
 package com.github.winneonsword.MM.events;
 
+import java.util.List;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -22,6 +27,7 @@ import com.github.lyokofirelyte.WCAPI.Events.ScoreboardUpdateEvent;
 import com.github.winneonsword.MM.ClassAbility;
 import com.github.winneonsword.MM.MainMM;
 import com.github.winneonsword.MM.exceptions.InvalidClassException;
+import com.github.winneonsword.MM.utils.UtilsGameplay;
 import com.github.winneonsword.MM.utils.UtilsMM;
 
 public class PlayerInteract extends UtilsMM implements Listener {
@@ -196,6 +202,105 @@ public class PlayerInteract extends UtilsMM implements Listener {
 					
 				}
 				
+				
+			}
+			
+		}
+		
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void onInfernoFireball(PlayerInteractEvent e){
+		
+		Action act = e.getAction();
+		
+		if (act == Action.LEFT_CLICK_AIR || act == Action.LEFT_CLICK_BLOCK){
+			
+			final Player p = e.getPlayer();
+			World world = p.getWorld();
+			PlayerInventory inven = p.getInventory();
+			ItemStack item = inven.getItemInHand();
+			ItemMeta meta = item.getItemMeta();
+			String display = meta.getDisplayName();
+			String lore = meta.getLore().get(0);
+			
+			if (display.equals(this.AS("&e&lInferno Wand")) && lore.equals(this.AS("&6Use this to shoot fireballs!")) && this.pl.utils.getRound() <= this.pl.utils.getTotalRounds()){
+				
+				Location eye = p.getEyeLocation();
+				Vector vect = eye.getDirection().multiply(2);
+				final Projectile projectile = world.spawn(eye.add(vect.getX(), vect.getY(), vect.getZ()), Fireball.class);
+				
+				this.pl.utils.fireball.put(projectile, true);
+				projectile.setShooter(p);
+				projectile.setVelocity(vect);
+				
+				this.delay(this.pl, new Runnable(){
+					
+					public void run(){
+						
+						if (projectile != null){
+							
+							pl.utils.fireball.remove(projectile);
+							projectile.remove();
+							
+						}
+						
+					}
+					
+				}, 100L);
+				
+			}
+			
+			if (display.equals(this.AS("&e&lInferno Wand")) && lore.equals(this.AS("&6Use this to forge a fire ring around you!")) && this.pl.utils.getRound() <= this.pl.utils.getTotalRounds()){
+				
+				List<Location> circle = UtilsGameplay.makeCircle(p.getLocation(), 5, 1, true, false, 0);
+				List<Location> circle2 = UtilsGameplay.makeCircle(p.getLocation(), 4, 1, true, false, 0);
+				
+				for (Location loc : circle){
+					
+					for (int i = 0; i < 3; i++){
+						
+						world.playEffect(loc, Effect.MOBSPAWNER_FLAMES, 0);
+						world.playSound(loc, Sound.GHAST_FIREBALL, 1.0F, 0.5F);
+						
+					}
+					
+					
+					
+					while(loc.getBlock().getType() == Material.AIR){
+						
+						loc = new Location(loc.getWorld(), loc.getX(), loc.getY() - 1, loc.getZ());
+						
+					}
+					
+					loc = new Location(loc.getWorld(), loc.getX(), loc.getY() + 1, loc.getZ());
+				
+					loc.getBlock().setType(Material.FIRE);
+					
+				}
+				
+				for (Location loc : circle2){
+					
+					while(loc.getBlock().getType() == Material.AIR){
+						
+						loc = new Location(loc.getWorld(), loc.getX(), loc.getY() - 1, loc.getZ());
+						
+					}
+					
+					loc = new Location(loc.getWorld(), loc.getX(), loc.getY() + 1, loc.getZ());
+					
+					while (!(loc.getBlock().getType() == Material.AIR)){
+						
+						loc = new Location(loc.getWorld(), loc.getX(), loc.getY() + 1, loc.getZ());
+						
+					}
+					
+					loc.getBlock().setType(Material.FIRE);
+					
+				}
+				
+				//this.s(p, "Your &6Inferno Wand &dhas run out of uses!");
+				//inven.setItemInHand(new ItemStack(Material.AIR, 1));
 				
 			}
 			

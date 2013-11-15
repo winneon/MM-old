@@ -2,10 +2,12 @@ package com.github.winneonsword.MM.events;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 
 import com.github.winneonsword.MM.Gameplay;
@@ -92,6 +94,26 @@ public class EntityDeath extends UtilsMM implements Listener {
 					e.getDrops().add(this.pl.utils.getShardItem());
 					
 				}
+				
+			}
+			
+		}
+		
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void onFireballDamage(EntityDamageByEntityEvent e){
+		
+		DamageCause cause = e.getCause();
+		
+		if (cause == DamageCause.PROJECTILE){
+			
+			Projectile p = (Projectile) e.getDamager();
+			
+			if (this.pl.utils.fireball.containsKey(p)){
+				
+				this.pl.utils.fireball.remove(p);
+				e.getEntity().setFireTicks(100);
 				
 			}
 			

@@ -3,6 +3,7 @@ package com.github.winneonsword.MM;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
@@ -51,6 +52,7 @@ public class ClassAbility extends UtilsMM{
 	private boolean alphaAbility(Player p, String name){
 		
 		final Player finalP = p;
+		final PlayerInventory inven = p.getInventory();
 		
 		switch (name){
 		
@@ -103,6 +105,21 @@ public class ClassAbility extends UtilsMM{
 			
 		case "inferno":
 			
+			this.s(p, "You have been given an &6Inferno Wand &dthat allows you to shoot fireballs on click for 30 seconds!");
+			this.s(p, "&c5 shards have been withdrawn.");
+			inven.addItem(this.pl.utils.getInfernoWand("alpha"));
+			p.updateInventory();
+			
+			this.delay(this.pl, new Runnable(){
+				
+				public void run(){
+					
+					inven.remove(Material.STICK);
+					UtilsMM.s(finalP, "Your &6Inferno Wand &dhas worn out!");
+					
+				}
+				
+			}, 600L);
 			
 			break;
 			
@@ -125,6 +142,7 @@ public class ClassAbility extends UtilsMM{
 	private boolean omegaAbility(Player p, String name){
 		
 		final Player finalP = p;
+		PlayerInventory inven = p.getInventory();
 		
 		switch (name){
 		
@@ -158,8 +176,7 @@ public class ClassAbility extends UtilsMM{
 			for (int i = 0; i < this.getPlayerList().size(); i++){
 				
 				String pl = this.getPlayerList().get(i);
-				Player player = Bukkit.getPlayer(pl);
-				finalP = player;
+				final Player player = Bukkit.getPlayer(pl);
 				
 				player.setAllowFlight(true);
 				
@@ -173,8 +190,8 @@ public class ClassAbility extends UtilsMM{
 					
 					public void run(){
 						
-						finalP.setAllowFlight(false);
-						finalP.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 300, 4));
+						player.setAllowFlight(false);
+						player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 300, 4));
 						UtilsMM.s(finalP, "Your &6fly mode &dhas worn off!");
 						
 					}
@@ -187,8 +204,6 @@ public class ClassAbility extends UtilsMM{
 			
 		case "warrior":
 			
-			PlayerInventory inven = p.getInventory();
-			
 			this.s(p, "You have been given a &6Warrior Axe &dthat knockbacks all mobs around you on click! (3 time use.)");
 			this.s(p, "&c8 shards have been withdrawn.");
 			inven.addItem(this.pl.utils.getWarriorAxe());
@@ -197,7 +212,10 @@ public class ClassAbility extends UtilsMM{
 			
 		case "inferno":
 			
-			
+			this.s(p, "You have been given an &6Inferno Wand &dthat allows you to forge a fire ring around you! (1 time use.)");
+			this.s(p, "&c8 shards have been withdrawn.");
+			inven.addItem(this.pl.utils.getInfernoWand("omega"));
+			p.updateInventory();
 			break;
 			
 		case "roadrunner":

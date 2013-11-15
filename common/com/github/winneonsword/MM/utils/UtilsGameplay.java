@@ -1,5 +1,9 @@
 package com.github.winneonsword.MM.utils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -9,6 +13,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -18,6 +23,8 @@ import com.github.winneonsword.MM.MainMM;
 import com.github.winneonsword.MM.exceptions.InvalidClassException;
 
 public class UtilsGameplay extends UtilsMM {
+	
+	public HashMap<Projectile, Boolean> fireball = new HashMap<Projectile, Boolean>();
 	
 	private Player p;
 	private PlayerInventory inven;
@@ -271,6 +278,36 @@ public class UtilsGameplay extends UtilsMM {
 		
 	}
 	
+	// This method goes to Rprrr on the Bukkit forums!
+	
+	public static List<Location> makeCircle(Location loc, Integer r, Integer h, Boolean hollow, Boolean sphere, int plus_y) {
+		
+		List<Location> circleblocks = new ArrayList<Location>();
+		int cx = loc.getBlockX();
+		int cy = loc.getBlockY();
+		int cz = loc.getBlockZ();
+		
+		for (int x = cx - r; x <= cx +r; x++)
+			
+			for (int z = cz - r; z <= cz +r; z++)
+				
+				for (int y = (sphere ? cy - r : cy); y < (sphere ? cy + r : cy + h); y++) {
+					
+					double dist = (cx - x) * (cx - x) + (cz - z) * (cz - z) + (sphere ? (cy - y) * (cy - y) : 0);
+					
+					if (dist < r*r && !(hollow && dist < (r-1)*(r-1))) {
+						
+						Location l = new Location(loc.getWorld(), x, y + plus_y, z);
+						circleblocks.add(l);
+						
+					}
+					
+				}
+		
+		return circleblocks;
+		
+	}
+	
 	public boolean checkMobType(int round, LivingEntity e){
 		
 		if (e.getLocation().distance(this.getArena()) <= this.getArenaR()){
@@ -344,6 +381,26 @@ public class UtilsGameplay extends UtilsMM {
 		ItemStack axe = this.pl.invManager.makeItem(this.AS("&e&lWarrior Axe"), this.AS("&6Use this to knockback mobs!"), true, Enchantment.DURABILITY, 10, 0, Material.DIAMOND_AXE, 1);
 		
 		return axe;
+		
+	}
+	
+	public ItemStack getInfernoWand(String type){
+		
+		ItemStack wand = null;
+		
+		if (type.equals("alpha")){
+			
+			wand = this.pl.invManager.makeItem(this.AS("&e&lInferno Wand"), this.AS("&6Use this to shoot fireballs!"), true, Enchantment.DURABILITY, 10, 0, Material.STICK, 1);
+			
+		}
+		
+		if (type.equals("omega")){
+			
+			wand = this.pl.invManager.makeItem(this.AS("&e&lInferno Wand"), this.AS("&6Use this to forge a fire ring around you!"), true, Enchantment.DURABILITY, 10, 0, Material.STICK, 1);
+			
+		}
+		
+		return wand;
 		
 	}
 	
