@@ -6,7 +6,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
-import com.github.lyokofirelyte.WCAPI.WCPlayer;
 import com.github.lyokofirelyte.WCAPI.Events.ScoreboardUpdateEvent;
 import com.github.winneonsword.MM.utils.UtilsGameplay;
 import com.github.winneonsword.MM.utils.UtilsMM;
@@ -217,16 +216,8 @@ public class Gameplay extends UtilsGameplay implements Listener {
 				
 				String pl = this.getPlayerList().get(i);
 				Player p = Bukkit.getPlayer(pl);
-				WCPlayer wcp = this.pl.wcm.getWCPlayer(p.getName());
 				
-				p.setOp(true);
-				p.performCommand("eco give " + p.getName() + " 10000");
-				
-				if (!(wcp.isWCOp())){
-					
-					p.setOp(false);
-					
-				}
+				Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "eco give " + p.getName() + " 10000");
 				
 			}
 			
