@@ -96,6 +96,7 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 									this.WC + "Mob Mondays Staff Commands",
 									"&5- &d/mm start &5// &dStart an MM game.",
 									"&5- &d/mm stop &5// &dStop an MM game. THERE IS NO CONFIRM!",
+									"&5- &d/mm round <round> &5// &dStart a specific round.",
 									"&5- &d/mm toggle &5// &dToggle the open status of MM.",
 									"&5- &d/mm add <player> <class> &5// &dAdd a player from MM. DEBUG ONLY.",
 									"&5- &d/mm remove <player> &5// &dRemove a player from MM. DEBUG ONLY.",
@@ -457,6 +458,38 @@ public class MMCommand extends UtilsMM implements CommandExecutor {
 						} else {
 							
 							this.s(p, "The player &7" + pl.getName() + " &dhas not joined MM!");
+							
+						}
+						
+					}
+					
+					break;
+					
+				case "round":
+					
+					if (!(p.hasPermission("wa.staff"))){
+						
+						this.s(p, "&cDoes it look like you have permission to use this?");
+						
+					} else {
+						
+						if (args.length == 1){
+							
+							this.s(p, "&cCorrect usage: /mm round <round> - Start a specfic round.");
+							
+						} else {
+							
+							boolean check = this.parseInteger(args[1]);
+							
+							if (check){
+								
+								this.game.beginRound(Integer.parseInt(args[1]));
+								
+							} else {
+								
+								this.s(p, "&cThe round you entered is not a number!");
+								
+							}
 							
 						}
 						

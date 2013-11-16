@@ -132,6 +132,21 @@ public class ClassAbility extends UtilsMM{
 			
 		case "sniper":
 			
+			this.s(p, "You can now &6Headshot (1 - Hit KO) &dany mob besides bosses for 20 seconds!");
+			this.s(p, "&c5 shards have been withdrawn.");
+			this.pl.utils.setVariables(p);
+			this.pl.utils.setOneHitKO(true);
+			
+			this.delay(this.pl, new Runnable(){
+				
+				public void run(){
+					
+					UtilsMM.s(finalP, "Your &6Headshot &dability has worn off!");
+					UtilsMM.pl.utils.setOneHitKO(false);
+					
+				}
+				
+			}, 400);
 			
 			break;
 			
@@ -230,7 +245,7 @@ public class ClassAbility extends UtilsMM{
 				String pl = this.getPlayerList().get(i);
 				Player player = Bukkit.getPlayer(pl);
 				
-				p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1200, 3));
+				p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1200, 3));
 				
 				if (player != p){
 					
@@ -244,7 +259,9 @@ public class ClassAbility extends UtilsMM{
 			
 		case "sniper":
 			
-			
+			this.s(p, "This is still a WIP! Sorry. Here are your shards back.");
+			this.pl.utils.setVariables(p);
+			this.pl.utils.setShards(this.pl.utils.getShards() + 8);
 			break;
 			
 		}

@@ -32,6 +32,7 @@ public class UtilsGameplay extends UtilsMM {
 	private ClassData data = null;
 	
 	private boolean scoreboard;
+	private boolean boss;
 	private int round;
 	
 	private int totalKilled;
@@ -65,7 +66,7 @@ public class UtilsGameplay extends UtilsMM {
 	
 	public int getTotalRounds(){
 		
-		return 4;
+		return 10;
 		
 	}
 	
@@ -182,6 +183,18 @@ public class UtilsGameplay extends UtilsMM {
 	public boolean getScoreboard(){
 		
 		return this.scoreboard;
+		
+	}
+	
+	public boolean getBossSpawn(){
+		
+		return this.boss;
+		
+	}
+	
+	public void setBossSpawn(boolean bool){
+		
+		this.boss = bool;
 		
 	}
 	
@@ -316,7 +329,7 @@ public class UtilsGameplay extends UtilsMM {
 			
 			switch (round){
 			
-			case 1:
+			case 1: case 5:
 				
 				if (ent == EntityType.ZOMBIE){
 					
@@ -356,6 +369,56 @@ public class UtilsGameplay extends UtilsMM {
 				
 				break;
 				
+			case 6:
+				
+				if (ent == EntityType.ZOMBIE || ent == EntityType.SKELETON || ent == EntityType.SPIDER || ent == EntityType.BLAZE){
+					
+					return true;
+					
+				}
+				
+				break;
+				
+			case 7:
+				
+				if (ent == EntityType.ZOMBIE || ent == EntityType.SKELETON || ent == EntityType.SPIDER || ent == EntityType.BLAZE || ent == EntityType.SLIME){
+					
+					return true;
+					
+				}
+				
+				break;
+				
+			case 8:
+				
+				if (ent == EntityType.SKELETON || ent == EntityType.BLAZE || ent == EntityType.SLIME || ent == EntityType.MAGMA_CUBE){
+					
+					return true;
+					
+				}
+				
+				break;
+				
+			case 9:
+				
+				if (ent == EntityType.ZOMBIE || ent == EntityType.SKELETON || ent == EntityType.SPIDER || ent == EntityType.BLAZE || ent == EntityType.SLIME || ent == EntityType.MAGMA_CUBE || ent == EntityType.GHAST){
+					
+					return true;
+					
+				}
+				
+				break;
+				
+			case 10:
+				
+				if (ent == EntityType.ZOMBIE || ent == EntityType.WITHER){
+					
+					return true;
+					
+				}
+				
+				break;
+				
 			}
 			
 			return false;
@@ -384,6 +447,14 @@ public class UtilsGameplay extends UtilsMM {
 		
 	}
 	
+	public ItemStack getSniperBarrage(){
+		
+		ItemStack barrage = this.pl.invManager.makeItem(this.AS("&e&lSniper Barrage"), this.AS("&6Use this to fire a barrage of arrows!"), true, Enchantment.DURABILITY, 10, 0, Material.BOW, 1);
+		
+		return barrage;
+		
+	}
+	
 	public ItemStack getInfernoWand(String type){
 		
 		ItemStack wand = null;
@@ -401,6 +472,61 @@ public class UtilsGameplay extends UtilsMM {
 		}
 		
 		return wand;
+		
+	}
+	
+	public ItemStack getBossHelmet(){
+		
+		ItemStack helm = this.pl.invManager.makeItem(this.AS("&b&lBoss Helmet"), "", true, Enchantment.PROTECTION_ENVIRONMENTAL, 6, 0, Material.DIAMOND_HELMET, 1);
+		
+		helm.getItemMeta().addEnchant(Enchantment.DURABILITY, 10, true);
+		
+		return helm;
+		
+	}
+	
+	public ItemStack getBossChest(){
+		
+		ItemStack chest = this.pl.invManager.makeItem(this.AS("&b&lBoss Chestplate"), "", true, Enchantment.PROTECTION_ENVIRONMENTAL, 6, 0, Material.DIAMOND_CHESTPLATE, 1);
+		
+		chest.getItemMeta().addEnchant(Enchantment.DURABILITY, 10, true);
+		
+		return chest;
+		
+	}
+	
+	public ItemStack getBossTrousers(){
+		
+		ItemStack trousers = this.pl.invManager.makeItem(this.AS("&b&lBoss Trousers"), "", true, Enchantment.PROTECTION_ENVIRONMENTAL, 6, 0, Material.DIAMOND_LEGGINGS, 1);
+		
+		trousers.getItemMeta().addEnchant(Enchantment.DURABILITY, 10, true);
+		
+		return trousers;
+		
+	}
+
+	public ItemStack getBossBooties(){
+		
+		ItemStack booties = this.pl.invManager.makeItem(this.AS("&b&lBoss Booties"), "", true, Enchantment.PROTECTION_ENVIRONMENTAL, 6, 0, Material.DIAMOND_BOOTS, 1);
+		
+		booties.getItemMeta().addEnchant(Enchantment.DURABILITY, 10, true);
+		
+		return booties;
+		
+	}
+	
+	public ItemStack[] getBossArmour(){
+		
+		ItemStack[] armour = {
+				
+				this.getBossHelmet(),
+				this.getBossChest(),
+				this.getBossTrousers(),
+				this.getBossBooties()
+				
+		};
+		
+		return armour;
 		
 	}
 	
@@ -429,6 +555,7 @@ public class UtilsGameplay extends UtilsMM {
 	private void setVariables(){
 		
 		this.scoreboard = false;
+		this.boss = false;
 		
 	}
 	

@@ -20,6 +20,7 @@ import com.github.lyokofirelyte.WCAPI.Events.ScoreboardUpdateEvent;
 import com.github.lyokofirelyte.WCAPI.Manager.InventoryManager;
 import com.github.winneonsword.MM.commands.MMCommand;
 import com.github.winneonsword.MM.events.EntityDeath;
+import com.github.winneonsword.MM.events.EntitySpawn;
 import com.github.winneonsword.MM.events.MiscEvents;
 import com.github.winneonsword.MM.events.PlayerInteract;
 import com.github.winneonsword.MM.events.ScoreboardMM;
@@ -151,6 +152,7 @@ public class MainMM extends JavaPlugin {
 		this.pm.registerEvents(new EntityDeath(this), this);
 		this.pm.registerEvents(new ScoreboardMM(this), this);
 		this.pm.registerEvents(new PlayerInteract(this), this);
+		this.pm.registerEvents(new EntitySpawn(this), this);
 		
 	}
 	

@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -300,6 +301,38 @@ public class UtilsMM {
 		
 		pl.datacore.set("Users." + p.getName() + ".class", name);
 		changingClass.remove(p.getName());
+		
+	}
+	
+	public Location checkForAir(Location loc){
+		
+		while (loc.getBlock().getType() == Material.AIR){
+			
+			loc = new Location(loc.getWorld(), loc.getX(), loc.getY() - 1, loc.getZ());
+			
+			if (loc.getY() <= 1){
+				
+				break;
+				
+			}
+			
+		}
+		
+		loc = new Location(loc.getWorld(), loc.getX(), loc.getY() + 1, loc.getZ());
+	
+		while (!(loc.getBlock().getType() == Material.AIR)){
+			
+			loc = new Location(loc.getWorld(), loc.getX(), loc.getY() + 1, loc.getZ());
+			
+			if (loc.getY() >= 250){
+				
+				break;
+				
+			}
+			
+		}
+		
+		return loc;
 		
 	}
 	

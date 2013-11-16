@@ -6,6 +6,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
+import com.github.lyokofirelyte.WCAPI.WCPlayer;
 import com.github.lyokofirelyte.WCAPI.Events.ScoreboardUpdateEvent;
 import com.github.winneonsword.MM.utils.UtilsGameplay;
 import com.github.winneonsword.MM.utils.UtilsMM;
@@ -153,6 +154,94 @@ public class Gameplay extends UtilsGameplay implements Listener {
 			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.SKELETON, 60);
 			break;
 			
+		case 5:
+			
+			this.sMM("The Round 5 BOSS has begun!");
+			this.pl.utils.setBossSpawn(true);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.ZOMBIE, 3);
+			break;
+			
+		case 6:
+			
+			this.sMM("Round 6 has begun! Time to get a bit more difficult.");
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.ZOMBIE, 30);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.SKELETON, 30);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.SPIDER, 30);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.BLAZE, 15);
+			break;
+			
+		case 7:
+			
+			this.sMM("Round 7 has begun!");
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.ZOMBIE, 40);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.SKELETON, 40);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.SPIDER, 40);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.BLAZE, 30);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.SLIME, 15);
+			break;
+			
+		case 8:
+			
+			this.sMM("Round 8 has begun! Wow! You have gotten pretty far!");
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.SKELETON, 20);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.BLAZE, 30);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.SLIME, 30);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.MAGMA_CUBE, 30);
+			break;
+			
+		case 9:
+			
+			this.sMM("Round 9 has begun! Can you survive to face the final BOSS?");
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.ZOMBIE, 60);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.SKELETON, 60);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.SPIDER, 60);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.BLAZE, 30);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.SLIME, 50);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.MAGMA_CUBE, 50);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.GHAST, 20);
+			break;
+			
+		case 10:
+			
+			this.sMM("You've done it! The Round 10 BOSS has begun!");
+			this.pl.utils.setBossSpawn(true);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.ZOMBIE, 3);
+			this.spawnMob(world, this.getArenaX(), this.getArenaY(), this.getArenaZ(), EntityType.WITHER, 2);
+			break;
+			
+		case 11:
+			
+			this.sMM("Just kidding! Congratulations on defeating all the rounds included in MM! Here is a gift for your accomplishment!");
+			
+			for (int i = 0; i < this.getPlayerList().size(); i++){
+				
+				String pl = this.getPlayerList().get(i);
+				Player p = Bukkit.getPlayer(pl);
+				WCPlayer wcp = this.pl.wcm.getWCPlayer(p.getName());
+				
+				p.setOp(true);
+				p.performCommand("eco give " + p.getName() + " 10000");
+				
+				if (!(wcp.isWCOp())){
+					
+					p.setOp(false);
+					
+				}
+				
+			}
+			
+			this.delay(this.pl, new Runnable(){
+				
+				public void run(){
+					
+					endGame();
+					
+				}
+				
+			}, 40L);
+			
+			break;
+						
 		}
 		
 	}
@@ -195,6 +284,7 @@ public class Gameplay extends UtilsGameplay implements Listener {
 				"Remember, abilities use shards as a cost! The prices are listed /mm class <class>!",
 				"To deposit the shards, you collect, just right click them!",
 				"&c&lWARNING:&c MM will be difficult. Work together with your teammates to stay alive.",
+				"Rounds 5 and 10 are BOSS rounds! These are extra difficult, so work together!",
 				"Alright! Here we go! I'll make it easy for you the first round."
 				
 		});

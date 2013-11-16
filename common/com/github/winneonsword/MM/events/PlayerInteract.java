@@ -17,6 +17,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -49,8 +50,21 @@ public class PlayerInteract extends UtilsMM implements Listener {
 			PlayerInventory inven = p.getInventory();
 			ItemStack item = inven.getItemInHand();
 			ItemMeta meta = item.getItemMeta();
-			String display = meta.getDisplayName();
-			String lore = meta.getLore().get(0);
+			String display = "";
+			
+			if (meta.hasDisplayName()){
+				
+				display = meta.getDisplayName();
+				
+			}
+			
+			String lore = "";
+			
+			if (meta.hasLore()){
+				
+				lore = meta.getLore().get(0);
+				
+			}
 			
 			if (display.equals(this.AS("&d&lElemental Shard")) && lore.equals(this.AS("&6Right click me!")) && this.pl.utils.getRound() <= this.pl.utils.getTotalRounds()){
 				
@@ -90,8 +104,22 @@ public class PlayerInteract extends UtilsMM implements Listener {
 			PlayerInventory inven = p.getInventory();
 			ItemStack item = inven.getItemInHand();
 			ItemMeta meta = item.getItemMeta();
-			String display = meta.getDisplayName();
-			String lore = meta.getLore().get(0);
+			String display = "";
+			
+			if (meta.hasDisplayName()){
+				
+				display = meta.getDisplayName();
+				
+			}
+			
+			String lore = "";
+			
+			if (meta.hasLore()){
+				
+				lore = meta.getLore().get(0);
+				
+			}
+			
 			ClassAbility ability = null;
 			
 			if (display.equals(this.AS("&2&lAlpha Ability")) && lore.equals(this.AS("&6Right click me!")) && this.pl.utils.getRound() <= this.pl.utils.getTotalRounds()){
@@ -170,8 +198,21 @@ public class PlayerInteract extends UtilsMM implements Listener {
 			PlayerInventory inven = p.getInventory();
 			ItemStack item = inven.getItemInHand();
 			ItemMeta meta = item.getItemMeta();
-			String display = meta.getDisplayName();
-			String lore = meta.getLore().get(0);
+			String display = "";
+			
+			if (meta.hasDisplayName()){
+				
+				display = meta.getDisplayName();
+				
+			}
+			
+			String lore = "";
+			
+			if (meta.hasLore()){
+				
+				lore = meta.getLore().get(0);
+				
+			}
 			
 			if (display.equals(this.AS("&e&lWarrior Axe")) && lore.equals(this.AS("&6Use this to knockback mobs!")) && this.pl.utils.getRound() <= this.pl.utils.getTotalRounds()){
 				
@@ -210,7 +251,7 @@ public class PlayerInteract extends UtilsMM implements Listener {
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL)
-	public void onInfernoFireball(PlayerInteractEvent e){
+	public void onInfernoAbility(PlayerInteractEvent e){
 		
 		Action act = e.getAction();
 		
@@ -221,8 +262,20 @@ public class PlayerInteract extends UtilsMM implements Listener {
 			PlayerInventory inven = p.getInventory();
 			ItemStack item = inven.getItemInHand();
 			ItemMeta meta = item.getItemMeta();
-			String display = meta.getDisplayName();
-			String lore = meta.getLore().get(0);
+			String display = "";
+			String lore = "";
+			
+			if (meta.hasDisplayName()){
+				
+				display = meta.getDisplayName();
+				
+			}
+			
+			if (meta.hasLore()){
+				
+				lore = meta.getLore().get(0);
+				
+			}
 			
 			if (display.equals(this.AS("&e&lInferno Wand")) && lore.equals(this.AS("&6Use this to shoot fireballs!")) && this.pl.utils.getRound() <= this.pl.utils.getTotalRounds()){
 				
@@ -319,35 +372,34 @@ public class PlayerInteract extends UtilsMM implements Listener {
 		
 	}
 	
-	private Location checkForAir(Location loc){
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void onSniperOmega(ProjectileHitEvent e){
 		
-		while (loc.getBlock().getType() == Material.AIR){
+		Player p = (Player) e.getEntity().getShooter();
+		PlayerInventory inven = p.getInventory();
+		ItemStack item = inven.getItemInHand();
+		ItemMeta meta = item.getItemMeta();
+		String display = "";
+		
+		if (meta.hasDisplayName()){
 			
-			loc = new Location(loc.getWorld(), loc.getX(), loc.getY() - 1, loc.getZ());
-			
-			if (loc.getY() <= 1){
-				
-				break;
-				
-			}
+			display = meta.getDisplayName();
 			
 		}
 		
-		loc = new Location(loc.getWorld(), loc.getX(), loc.getY() + 1, loc.getZ());
-	
-		while (!(loc.getBlock().getType() == Material.AIR)){
+		String lore = "";
+		
+		if (meta.hasLore()){
 			
-			loc = new Location(loc.getWorld(), loc.getX(), loc.getY() + 1, loc.getZ());
-			
-			if (loc.getY() >= 250){
-				
-				break;
-				
-			}
+			lore = meta.getLore().get(0);
 			
 		}
 		
-		return loc;
+		if (display.equals(this.AS("&e&lExplosive Bow")) && lore.equals(this.AS("&6Use this to fire an explosive arrow!")) && this.pl.utils.getRound() <= this.pl.utils.getTotalRounds()){
+			
+			
+			
+		}
 		
 	}
 	

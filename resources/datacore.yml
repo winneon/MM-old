@@ -1,3 +1,4 @@
+boss: false
 Classes:
   medic:
     description: A support class that is focused on healing.
