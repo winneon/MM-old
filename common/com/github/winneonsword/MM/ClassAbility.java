@@ -125,7 +125,9 @@ public class ClassAbility extends UtilsMM{
 			
 		case "roadrunner":
 			
-			
+			p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1200, 3));
+			this.s(p, "You have given yourself &6Speed IV &dfor one minute!");
+			this.s(p, "&c5 shards have been withdrawn.");
 			break;
 			
 		case "sniper":
@@ -220,6 +222,23 @@ public class ClassAbility extends UtilsMM{
 			
 		case "roadrunner":
 			
+			this.s(p, "You have given everyone &6Speed IV &dfor one minute!");
+			this.s(p, "&c8 shards have been withdrawn.");
+			
+			for (int i = 0; i < this.getPlayerList().size(); i++){
+				
+				String pl = this.getPlayerList().get(i);
+				Player player = Bukkit.getPlayer(pl);
+				
+				p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1200, 3));
+				
+				if (player != p){
+					
+					this.s(player, p.getDisplayName() + " &dhas given you &6Speed IV &dfor one minute!");
+					
+				}
+				
+			}
 			
 			break;
 			
