@@ -233,6 +233,7 @@ public class PlayerInteract extends UtilsMM implements Listener {
 				this.pl.utils.fireball.put(projectile, true);
 				projectile.setShooter(p);
 				projectile.setVelocity(vect);
+				world.playSound(p.getLocation(), Sound.GHAST_FIREBALL, 1.0F, 1.0F);
 				
 				this.delay(this.pl, new Runnable(){
 					
@@ -258,6 +259,9 @@ public class PlayerInteract extends UtilsMM implements Listener {
 				
 				for (Location loc : circle){
 					
+					loc = this.checkForAir(loc);
+					final Location loc2 = loc;
+					
 					for (int i = 0; i < 3; i++){
 						
 						world.playEffect(loc, Effect.MOBSPAWNER_FLAMES, 0);
@@ -265,46 +269,85 @@ public class PlayerInteract extends UtilsMM implements Listener {
 						
 					}
 					
-					
-					
-					while(loc.getBlock().getType() == Material.AIR){
-						
-						loc = new Location(loc.getWorld(), loc.getX(), loc.getY() - 1, loc.getZ());
-						
-					}
-					
-					loc = new Location(loc.getWorld(), loc.getX(), loc.getY() + 1, loc.getZ());
-				
 					loc.getBlock().setType(Material.FIRE);
+					
+					this.delay(this.pl, new Runnable(){
+						
+						public void run(){
+							
+							if (loc2.getBlock().getType() == Material.FIRE){
+								
+								loc2.getBlock().setType(Material.AIR);
+								
+							}
+							
+						}
+						
+					}, 200L);
 					
 				}
 				
 				for (Location loc : circle2){
 					
-					while(loc.getBlock().getType() == Material.AIR){
-						
-						loc = new Location(loc.getWorld(), loc.getX(), loc.getY() - 1, loc.getZ());
-						
-					}
-					
-					loc = new Location(loc.getWorld(), loc.getX(), loc.getY() + 1, loc.getZ());
-					
-					while (!(loc.getBlock().getType() == Material.AIR)){
-						
-						loc = new Location(loc.getWorld(), loc.getX(), loc.getY() + 1, loc.getZ());
-						
-					}
+					loc = this.checkForAir(loc);
+					final Location loc2 = loc;
 					
 					loc.getBlock().setType(Material.FIRE);
 					
+					this.delay(this.pl, new Runnable(){
+						
+						public void run(){
+							
+							if (loc2.getBlock().getType() == Material.FIRE){
+								
+								loc2.getBlock().setType(Material.AIR);
+								
+							}
+							
+						}
+						
+					}, 200L);
+					
 				}
 				
-				//this.s(p, "Your &6Inferno Wand &dhas run out of uses!");
-				//inven.setItemInHand(new ItemStack(Material.AIR, 1));
+				this.s(p, "Your &6Inferno Wand &dhas run out of uses!");
+				inven.setItemInHand(new ItemStack(Material.AIR, 1));
 				
 			}
 			
 		}
+		
+	}
+	
+	private Location checkForAir(Location loc){
+		
+		while (loc.getBlock().getType() == Material.AIR){
+			
+			loc = new Location(loc.getWorld(), loc.getX(), loc.getY() - 1, loc.getZ());
+			
+			if (loc.getY() <= 1){
+				
+				break;
+				
+			}
+			
+		}
+		
+		loc = new Location(loc.getWorld(), loc.getX(), loc.getY() + 1, loc.getZ());
+	
+		while (!(loc.getBlock().getType() == Material.AIR)){
+			
+			loc = new Location(loc.getWorld(), loc.getX(), loc.getY() + 1, loc.getZ());
+			
+			if (loc.getY() >= 250){
+				
+				break;
+				
+			}
+			
+		}
+		
+		return loc;
 		
 	}
 	
